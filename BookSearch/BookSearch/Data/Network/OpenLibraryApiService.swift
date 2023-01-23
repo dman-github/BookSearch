@@ -10,12 +10,13 @@ import Foundation
 enum ServiceError : Error {
     case invalidApiRequest
     case unknownAPIResponse
-    case decoderError
+    case decoderError(Error)
 }
 
 class OpenLibraryApiServiceImpl: OpenLibraryApiService {
     
-    func searchBooks(with searchTerm: String, completion: @escaping (Result<String, Error>) -> Void) {
+    
+    func searchBooks(with searchTerm: String, completion: @escaping (Result<BookSearchResponseDTO, Error>) -> Void) {
         guard let searchURL = openLibraryApiSearchURL(for: searchTerm) else {
             completion(.failure(ServiceError.invalidApiRequest))
             return
@@ -29,11 +30,19 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
             if let response = response as? HTTPURLResponse,
                response.statusCode == 200,
                let data = data {
-                // Decoding here
+                do {
+                    let response = try JSONDecoder().decode(BookSearchResponseDTO.self, from: data)
+                    completion(.success(response))
+                } catch {
+                    print(error)
+                    completion(.failure(ServiceError.decoderError(error)))
+                }
+            } else {
+                completion(.failure(ServiceError.unknownAPIResponse))
             }
-            completion(.failure(ServiceError.unknownAPIResponse))
-        }
+        }.resume()
     }
+    
     
     
     func loadLargeImage(withISBN isbn: String,
@@ -52,9 +61,10 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
                response.statusCode == 200,
                let data = data {
                 completion(.success(data))
+            } else {
+                completion(.failure(ServiceError.unknownAPIResponse))
             }
-            completion(.failure(ServiceError.unknownAPIResponse))
-        }
+        }.resume()
     }
     
     
@@ -63,7 +73,7 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
         guard let escapedTerm = isbn.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) else {
             return nil
         }
-        let URLString = "https://covers.openlibrary.org/b/ISBN/\(escapedTerm)-L.jpg?default=false"
+        let URLString = "https://covers.openlibrary.org/b/ISBN/\(escapedTerm)-L.jpg"
         return URL(string: URLString)
     }
     

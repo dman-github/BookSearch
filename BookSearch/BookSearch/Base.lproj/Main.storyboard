@@ -58,6 +58,10 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="HCJ-YE-lff" secondAttribute="bottom" constant="200" id="oYo-HU-WIE"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="activityView" destination="FeP-mP-STW" id="qD9-DN-Ana"/>
+                        <outlet property="imageView" destination="FpA-zY-8Zm" id="kqP-u7-8Gj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

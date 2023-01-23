@@ -15,6 +15,7 @@
 		09A2EDEC297EDD930078E4E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09A2EDEA297EDD930078E4E2 /* LaunchScreen.storyboard */; };
 		09A2EDF7297EEBD30078E4E2 /* OpenLibraryApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDF6297EEBD30078E4E2 /* OpenLibraryApiService.swift */; };
 		09A2EDF9297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDF8297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift */; };
+		09A2EDFC297F05F40078E4E2 /* BookSearchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDFB297F05F40078E4E2 /* BookSearchResponseDTO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		09A2EDED297EDD930078E4E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		09A2EDF6297EEBD30078E4E2 /* OpenLibraryApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLibraryApiService.swift; sourceTree = "<group>"; };
 		09A2EDF8297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenLibraryApiService+Protocol.swift"; sourceTree = "<group>"; };
+		09A2EDFB297F05F40078E4E2 /* BookSearchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchResponseDTO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -93,6 +95,7 @@
 			children = (
 				09A2EDF6297EEBD30078E4E2 /* OpenLibraryApiService.swift */,
 				09A2EDF8297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift */,
+				09A2EDFB297F05F40078E4E2 /* BookSearchResponseDTO.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -169,6 +172,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				09A2EDF7297EEBD30078E4E2 /* OpenLibraryApiService.swift in Sources */,
+				09A2EDFC297F05F40078E4E2 /* BookSearchResponseDTO.swift in Sources */,
 				09A2EDE7297EDD8A0078E4E2 /* BookSearch.xcdatamodeld in Sources */,
 				09A2EDF9297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift in Sources */,
 				09A2EDE1297EDD8A0078E4E2 /* ViewController.swift in Sources */,
