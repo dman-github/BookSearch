@@ -10,7 +10,7 @@ import Foundation
 enum ServiceError : Error {
     case invalidApiRequest
     case unknownAPIResponse
-    case generic
+    case decoderError
 }
 
 class OpenLibraryApiServiceImpl: OpenLibraryApiService {
@@ -20,16 +20,41 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
             completion(.failure(ServiceError.invalidApiRequest))
             return
         }
-        URLSession.shared.dataTask(with: URLRequest(url: searchURL)) { <#Data?#>, <#URLResponse?#>, <#Error?#> in
-            <#code#>
+        URLSession.shared.dataTask(with: URLRequest(url: searchURL)) { data, response, error in
+            if let error = error {
+                print("URLSession error is \(error.localizedDescription)")
+                completion(.failure(error))
+                return
+            }
+            if let response = response as? HTTPURLResponse,
+               response.statusCode == 200,
+               let data = data {
+                // Decoding here
+            }
+            completion(.failure(ServiceError.unknownAPIResponse))
         }
-        
     }
     
     
     func loadLargeImage(withISBN isbn: String,
                         _ completion: @escaping (Result<Data, Error>) -> Void) {
-        
+        guard let searchURL = openLibraryCoverLoadURL(withISBN: isbn) else {
+            completion(.failure(ServiceError.invalidApiRequest))
+            return
+        }
+        URLSession.shared.dataTask(with: URLRequest(url: searchURL)) { data, response, error in
+            if let error = error {
+                print("URLSession error is \(error.localizedDescription)")
+                completion(.failure(error))
+                return
+            }
+            if let response = response as? HTTPURLResponse,
+               response.statusCode == 200,
+               let data = data {
+                completion(.success(data))
+            }
+            completion(.failure(ServiceError.unknownAPIResponse))
+        }
     }
     
     
