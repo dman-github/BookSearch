@@ -13,6 +13,8 @@
 		09A2EDE7297EDD8A0078E4E2 /* BookSearch.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDE5297EDD8A0078E4E2 /* BookSearch.xcdatamodeld */; };
 		09A2EDE9297EDD930078E4E2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 09A2EDE8297EDD930078E4E2 /* Assets.xcassets */; };
 		09A2EDEC297EDD930078E4E2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09A2EDEA297EDD930078E4E2 /* LaunchScreen.storyboard */; };
+		09A2EDF7297EEBD30078E4E2 /* OpenLibraryApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDF6297EEBD30078E4E2 /* OpenLibraryApiService.swift */; };
+		09A2EDF9297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDF8297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		09A2EDE8297EDD930078E4E2 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		09A2EDEB297EDD930078E4E2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		09A2EDED297EDD930078E4E2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		09A2EDF6297EEBD30078E4E2 /* OpenLibraryApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLibraryApiService.swift; sourceTree = "<group>"; };
+		09A2EDF8297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenLibraryApiService+Protocol.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +60,8 @@
 		09A2EDDB297EDD8A0078E4E2 /* BookSearch */ = {
 			isa = PBXGroup;
 			children = (
+				09A2EDF3297EE9BC0078E4E2 /* Domain */,
+				09A2EDF4297EE9C90078E4E2 /* Data */,
 				09A2EDDC297EDD8A0078E4E2 /* AppDelegate.swift */,
 				09A2EDE0297EDD8A0078E4E2 /* ViewController.swift */,
 				09A2EDE2297EDD8A0078E4E2 /* Main.storyboard */,
@@ -65,6 +71,30 @@
 				09A2EDE5297EDD8A0078E4E2 /* BookSearch.xcdatamodeld */,
 			);
 			path = BookSearch;
+			sourceTree = "<group>";
+		};
+		09A2EDF3297EE9BC0078E4E2 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		09A2EDF4297EE9C90078E4E2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				09A2EDF5297EEA1A0078E4E2 /* Network */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		09A2EDF5297EEA1A0078E4E2 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				09A2EDF6297EEBD30078E4E2 /* OpenLibraryApiService.swift */,
+				09A2EDF8297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -138,7 +168,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				09A2EDF7297EEBD30078E4E2 /* OpenLibraryApiService.swift in Sources */,
 				09A2EDE7297EDD8A0078E4E2 /* BookSearch.xcdatamodeld in Sources */,
+				09A2EDF9297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift in Sources */,
 				09A2EDE1297EDD8A0078E4E2 /* ViewController.swift in Sources */,
 				09A2EDDD297EDD8A0078E4E2 /* AppDelegate.swift in Sources */,
 			);
