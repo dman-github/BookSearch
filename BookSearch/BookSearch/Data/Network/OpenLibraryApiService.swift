@@ -10,6 +10,8 @@ import Foundation
 enum ServiceError : Error {
     case invalidApiRequest
     case unknownAPIResponse
+    case networkError
+    case dataNotRxed
     case decoderError(Error)
 }
 
@@ -27,18 +29,17 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
                 completion(.failure(error))
                 return
             }
-            if let response = response as? HTTPURLResponse,
-               response.statusCode == 200,
-               let data = data {
-                do {
-                    let response = try JSONDecoder().decode(BookSearchResponseDTO.self, from: data)
-                    completion(.success(response))
-                } catch {
-                    print(error)
-                    completion(.failure(ServiceError.decoderError(error)))
-                }
-            } else {
-                completion(.failure(ServiceError.unknownAPIResponse))
+            guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
+                completion(.failure(ServiceError.networkError))
+                return
+            }
+            do {
+                guard let data = data else {return completion(.failure(ServiceError.dataNotRxed))}
+                let response = try JSONDecoder().decode(BookSearchResponseDTO.self, from: data)
+                completion(.success(response))
+            } catch {
+
+                completion(.failure(ServiceError.decoderError(error)))
             }
         }.resume()
     }
@@ -57,10 +58,14 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
                 completion(.failure(error))
                 return
             }
-            if let response = response as? HTTPURLResponse,
-               response.statusCode == 200,
-               let data = data {
-                completion(.success(data))
+            if let response = response as? HTTPURLResponse {
+                if (200 ..< 300) ~= response.statusCode {
+                    guard let data = data else {return completion(.failure(ServiceError.dataNotRxed))}
+                    completion(.success(data))
+                } else {
+                    print(response.statusCode)
+                    completion(.failure(ServiceError.networkError))
+                }
             } else {
                 completion(.failure(ServiceError.unknownAPIResponse))
             }
