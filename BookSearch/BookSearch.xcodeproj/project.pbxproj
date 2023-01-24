@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		090635CD29802F8B002CE8EB /* BookSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090635CC29802F8B002CE8EB /* BookSearchCell.swift */; };
+		090635CF298032DA002CE8EB /* BooksSearchVC+UISearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090635CE298032DA002CE8EB /* BooksSearchVC+UISearchBarDelegate.swift */; };
+		090635D12980341F002CE8EB /* BooksSearchVC+CollectionViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090635D02980341F002CE8EB /* BooksSearchVC+CollectionViewDataSource.swift */; };
+		090635D329804F57002CE8EB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090635D229804F57002CE8EB /* Constants.swift */; };
+		090635D529804FE0002CE8EB /* BookSearchVC+UICollectionViewDelegateFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090635D429804FE0002CE8EB /* BookSearchVC+UICollectionViewDelegateFlowLayout.swift */; };
 		09A2EDDD297EDD8A0078E4E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDDC297EDD8A0078E4E2 /* AppDelegate.swift */; };
 		09A2EDE1297EDD8A0078E4E2 /* BookSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDE0297EDD8A0078E4E2 /* BookSearchViewController.swift */; };
 		09A2EDE4297EDD8A0078E4E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09A2EDE2297EDD8A0078E4E2 /* Main.storyboard */; };
@@ -21,6 +25,10 @@
 
 /* Begin PBXFileReference section */
 		090635CC29802F8B002CE8EB /* BookSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchCell.swift; sourceTree = "<group>"; };
+		090635CE298032DA002CE8EB /* BooksSearchVC+UISearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BooksSearchVC+UISearchBarDelegate.swift"; sourceTree = "<group>"; };
+		090635D02980341F002CE8EB /* BooksSearchVC+CollectionViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BooksSearchVC+CollectionViewDataSource.swift"; sourceTree = "<group>"; };
+		090635D229804F57002CE8EB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		090635D429804FE0002CE8EB /* BookSearchVC+UICollectionViewDelegateFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookSearchVC+UICollectionViewDelegateFlowLayout.swift"; sourceTree = "<group>"; };
 		09A2EDD9297EDD8A0078E4E2 /* BookSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09A2EDDC297EDD8A0078E4E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09A2EDE0297EDD8A0078E4E2 /* BookSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchViewController.swift; sourceTree = "<group>"; };
@@ -77,11 +85,15 @@
 				090635CB29802F02002CE8EB /* Views */,
 				09A2EDDC297EDD8A0078E4E2 /* AppDelegate.swift */,
 				09A2EDE0297EDD8A0078E4E2 /* BookSearchViewController.swift */,
+				090635CE298032DA002CE8EB /* BooksSearchVC+UISearchBarDelegate.swift */,
+				090635D02980341F002CE8EB /* BooksSearchVC+CollectionViewDataSource.swift */,
+				090635D429804FE0002CE8EB /* BookSearchVC+UICollectionViewDelegateFlowLayout.swift */,
 				09A2EDE2297EDD8A0078E4E2 /* Main.storyboard */,
 				09A2EDE8297EDD930078E4E2 /* Assets.xcassets */,
 				09A2EDEA297EDD930078E4E2 /* LaunchScreen.storyboard */,
 				09A2EDED297EDD930078E4E2 /* Info.plist */,
 				09A2EDE5297EDD8A0078E4E2 /* BookSearch.xcdatamodeld */,
+				090635D229804F57002CE8EB /* Constants.swift */,
 			);
 			path = BookSearch;
 			sourceTree = "<group>";
@@ -184,10 +196,14 @@
 			files = (
 				09A2EDF7297EEBD30078E4E2 /* OpenLibraryApiService.swift in Sources */,
 				09A2EDFC297F05F40078E4E2 /* BookSearchResponseDTO.swift in Sources */,
+				090635D12980341F002CE8EB /* BooksSearchVC+CollectionViewDataSource.swift in Sources */,
 				09A2EDE7297EDD8A0078E4E2 /* BookSearch.xcdatamodeld in Sources */,
 				09A2EDF9297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift in Sources */,
+				090635D329804F57002CE8EB /* Constants.swift in Sources */,
 				09A2EDE1297EDD8A0078E4E2 /* BookSearchViewController.swift in Sources */,
+				090635D529804FE0002CE8EB /* BookSearchVC+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				090635CD29802F8B002CE8EB /* BookSearchCell.swift in Sources */,
+				090635CF298032DA002CE8EB /* BooksSearchVC+UISearchBarDelegate.swift in Sources */,
 				09A2EDDD297EDD8A0078E4E2 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
