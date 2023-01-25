@@ -46,9 +46,9 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
     
     
     
-    func loadLargeImage(withISBN isbn: String,
+    func loadLargeImage(withId id: String,
                         _ completion: @escaping (Result<Data, Error>) -> Void) {
-        guard let searchURL = openLibraryCoverLoadURL(withISBN: isbn) else {
+        guard let searchURL = openLibraryCoverLoadURL(withid: id) else {
             completion(.failure(ServiceError.invalidApiRequest))
             return
         }
@@ -73,12 +73,12 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
     }
     
     
-    private func openLibraryCoverLoadURL(withISBN isbn: String) -> URL? {
+    private func openLibraryCoverLoadURL(withid id: String) -> URL? {
         // adding % encoding for spaces in the text
-        guard let escapedTerm = isbn.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) else {
+        guard let escapedTerm = id.addingPercentEncoding(withAllowedCharacters: CharacterSet.alphanumerics) else {
             return nil
         }
-        let URLString = "https://covers.openlibrary.org/b/ISBN/\(escapedTerm)-L.jpg"
+        let URLString = "https://covers.openlibrary.org/b/id/\(escapedTerm)-L.jpg"
         return URL(string: URLString)
     }
     

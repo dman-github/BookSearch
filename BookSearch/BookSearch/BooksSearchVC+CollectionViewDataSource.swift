@@ -22,9 +22,9 @@ extension BookSearchViewController: UICollectionViewDataSource {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookSearchCell", for: indexPath) as? BookSearchCell {
             cell.backgroundColor = .black
             if indexPath.row < books.count {
-                let isdn = books[indexPath.row].isbn?.first ?? ""
-                print("Loading for \(isdn)   indexPath.row")
-                OpenLibraryApiServiceImpl().loadLargeImage(withISBN: isdn) {result in
+                let id = books[indexPath.row].coverId ?? 0
+                print("Loading for \(id)   \(indexPath.row)")
+                OpenLibraryApiServiceImpl().loadLargeImage(withId: "\(id)") {result in
                     switch result {
                         case .success(let data):
                             DispatchQueue.main.async {
@@ -32,7 +32,7 @@ extension BookSearchViewController: UICollectionViewDataSource {
                                 cell.activityView.stopAnimating()
                             }
                         case .failure(let error):
-                            print(error)
+                            print("\(error) \(indexPath.row)")
                     }
                 }
             }
