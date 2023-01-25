@@ -20,6 +20,7 @@ extension BookSearchViewController: UISearchBarDelegate {
                          self?.books = Array(docs[0..<10])
                          DispatchQueue.main.async {
                              self?.collectionView.reloadData()
+                             self?.searchBar.resignFirstResponder()
                          }
                      }
                  case .failure(let error):
