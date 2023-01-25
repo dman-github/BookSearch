@@ -86,7 +86,34 @@
                                                         </view>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Phl-bO-RAY">
                                                             <rect key="frame" x="140" y="0.0" width="140" height="247"/>
-                                                            <color key="backgroundColor" systemColor="systemBlueColor"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wfG-G8-400" userLabel="posLabel">
+                                                                    <rect key="frame" x="49" y="63.666666666666664" width="42.333333333333343" height="119.66666666666669"/>
+                                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="100"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Lord of the Rings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="3" translatesAutoresizingMaskIntoConstraints="NO" id="9F5-jf-Hqw" userLabel="titleLabel">
+                                                                    <rect key="frame" x="1" y="4.9999999999999964" width="138" height="61.666666666666657"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="9F5-jf-Hqw" secondAttribute="trailing" constant="1" id="LYS-y6-8se"/>
+                                                                <constraint firstItem="9F5-jf-Hqw" firstAttribute="leading" secondItem="Phl-bO-RAY" secondAttribute="leading" constant="1" id="Rzp-oY-anA"/>
+                                                                <constraint firstItem="9F5-jf-Hqw" firstAttribute="height" secondItem="Phl-bO-RAY" secondAttribute="height" multiplier="0.25" id="bfk-Yb-y3B"/>
+                                                                <constraint firstItem="wfG-G8-400" firstAttribute="centerY" secondItem="Phl-bO-RAY" secondAttribute="centerY" id="chR-S2-Qj2"/>
+                                                                <constraint firstItem="9F5-jf-Hqw" firstAttribute="top" secondItem="Phl-bO-RAY" secondAttribute="top" constant="5" id="kcR-WT-cyq"/>
+                                                                <constraint firstItem="wfG-G8-400" firstAttribute="centerX" secondItem="Phl-bO-RAY" secondAttribute="centerX" id="lyg-aq-cdW"/>
+                                                            </constraints>
+                                                            <variation key="default">
+                                                                <mask key="subviews">
+                                                                    <exclude reference="wfG-G8-400"/>
+                                                                </mask>
+                                                            </variation>
                                                         </view>
                                                     </subviews>
                                                     <color key="backgroundColor" red="0.0" green="0.55937099459999995" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -105,6 +132,7 @@
                                             <outlet property="activityView" destination="7t8-Qd-nG9" id="dXT-nY-99b"/>
                                             <outlet property="contentView" destination="ZLF-Oa-14k" id="3fg-uA-i85"/>
                                             <outlet property="imageView" destination="S5S-rt-yEI" id="NhW-Tf-HOm"/>
+                                            <outlet property="titleLabel" destination="9F5-jf-Hqw" id="whf-H6-BN4"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
@@ -140,9 +168,6 @@
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
             <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

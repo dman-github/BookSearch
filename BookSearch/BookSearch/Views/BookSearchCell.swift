@@ -9,6 +9,7 @@ import UIKit
 
 class BookSearchCell: UICollectionViewCell {
     @IBOutlet weak var activityView: UIActivityIndicatorView!
-    
     @IBOutlet weak var imageView: UIImageView!
+    
+    @IBOutlet weak var titleLabel: UILabel!
 }
