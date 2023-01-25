@@ -23,9 +23,9 @@ extension BookSearchViewController: UICollectionViewDelegateFlowLayout {
       sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
       let paddingSpace = Constants.sectionInsets.left * (Constants.itemsPerRow + 1)
-      let availableWidth = view.frame.width - paddingSpace
+      let availableWidth = collectionView.bounds.width - paddingSpace
       let widthPerItem = availableWidth / Constants.itemsPerRow
-
+        print("widthPerItem :\(widthPerItem)")
       return CGSize(width: widthPerItem, height: widthPerItem)
     }
 
@@ -41,6 +41,14 @@ extension BookSearchViewController: UICollectionViewDelegateFlowLayout {
       _ collectionView: UICollectionView,
       layout collectionViewLayout: UICollectionViewLayout,
       minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
+        return Constants.sectionInsets.left
+    }
+    
+    func collectionView(
+      _ collectionView: UICollectionView,
+      layout collectionViewLayout: UICollectionViewLayout,
+      minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
         return Constants.sectionInsets.left
     }
