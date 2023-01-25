@@ -99,15 +99,33 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Lord of the Rings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="NSi-3R-pJh" userLabel="authorLabel">
+                                                                    <rect key="frame" x="1" y="115.66666666666667" width="138" height="15.666666666666671"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The Lord of the Rings" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="LbP-mP-kaA" userLabel="yearLabel">
+                                                                    <rect key="frame" x="1" y="230.33333333333334" width="138" height="15.666666666666657"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
                                                             </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="LbP-mP-kaA" secondAttribute="trailing" constant="1" id="05P-Df-ggX"/>
+                                                                <constraint firstAttribute="bottom" secondItem="LbP-mP-kaA" secondAttribute="bottom" constant="1" id="5E3-dT-1P1"/>
+                                                                <constraint firstItem="LbP-mP-kaA" firstAttribute="leading" secondItem="Phl-bO-RAY" secondAttribute="leading" constant="1" id="AhV-k2-WNh"/>
+                                                                <constraint firstAttribute="trailing" secondItem="NSi-3R-pJh" secondAttribute="trailing" constant="1" id="IMk-q8-4b5"/>
                                                                 <constraint firstAttribute="trailing" secondItem="9F5-jf-Hqw" secondAttribute="trailing" constant="1" id="LYS-y6-8se"/>
                                                                 <constraint firstItem="9F5-jf-Hqw" firstAttribute="leading" secondItem="Phl-bO-RAY" secondAttribute="leading" constant="1" id="Rzp-oY-anA"/>
                                                                 <constraint firstItem="9F5-jf-Hqw" firstAttribute="height" secondItem="Phl-bO-RAY" secondAttribute="height" multiplier="0.25" id="bfk-Yb-y3B"/>
                                                                 <constraint firstItem="wfG-G8-400" firstAttribute="centerY" secondItem="Phl-bO-RAY" secondAttribute="centerY" id="chR-S2-Qj2"/>
                                                                 <constraint firstItem="9F5-jf-Hqw" firstAttribute="top" secondItem="Phl-bO-RAY" secondAttribute="top" constant="5" id="kcR-WT-cyq"/>
                                                                 <constraint firstItem="wfG-G8-400" firstAttribute="centerX" secondItem="Phl-bO-RAY" secondAttribute="centerX" id="lyg-aq-cdW"/>
+                                                                <constraint firstItem="NSi-3R-pJh" firstAttribute="leading" secondItem="Phl-bO-RAY" secondAttribute="leading" constant="1" id="q7R-3L-OgR"/>
+                                                                <constraint firstItem="NSi-3R-pJh" firstAttribute="centerY" secondItem="Phl-bO-RAY" secondAttribute="centerY" id="qga-0B-1eL"/>
                                                             </constraints>
                                                             <variation key="default">
                                                                 <mask key="subviews">
@@ -130,9 +148,12 @@
                                         <size key="customSize" width="300" height="267"/>
                                         <connections>
                                             <outlet property="activityView" destination="7t8-Qd-nG9" id="dXT-nY-99b"/>
+                                            <outlet property="authorLabel" destination="NSi-3R-pJh" id="gtx-oE-jOO"/>
                                             <outlet property="contentView" destination="ZLF-Oa-14k" id="3fg-uA-i85"/>
                                             <outlet property="imageView" destination="S5S-rt-yEI" id="NhW-Tf-HOm"/>
+                                            <outlet property="posLabel" destination="wfG-G8-400" id="MNw-i7-n8e"/>
                                             <outlet property="titleLabel" destination="9F5-jf-Hqw" id="whf-H6-BN4"/>
+                                            <outlet property="yearLabel" destination="LbP-mP-kaA" id="m9m-A5-XFS"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>

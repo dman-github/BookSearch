@@ -33,6 +33,9 @@ extension BookSearchViewController: UICollectionViewDataSource {
                             DispatchQueue.main.async {
                                 cell.imageView.image = UIImage(data: data)
                                 cell.titleLabel.text = title
+                                cell.authorLabel.text = author
+                                cell.yearLabel.text = "\(year)"
+                                
                                 cell.activityView.stopAnimating()
                             }
                         case .failure(let error):
