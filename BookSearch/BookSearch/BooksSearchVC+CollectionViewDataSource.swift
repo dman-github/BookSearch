@@ -22,20 +22,22 @@ extension BookSearchViewController: UICollectionViewDataSource {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookSearchCell", for: indexPath) as? BookSearchCell {
             cell.backgroundColor = .black
             if indexPath.row < books.count {
-                let id = books[indexPath.row].coverId ?? 0
-                let title = books[indexPath.row].title ?? ""
-                let author = books[indexPath.row].authorName?.first ?? ""
-                let year = books[indexPath.row].firstPublishedYear ?? 0
-                print("Loading for \(id)   \(indexPath.row)")
+                let index = indexPath.row
+                let id = books[index].coverId ?? 0
+                let title = books[index].title ?? ""
+                let author = books[index].authorName?.first ?? ""
+                let year = books[index].firstPublishedYear ?? 0
+                cell.titleLabel.text = title
+                cell.authorLabel.text = author
+                cell.yearLabel.text = "\(year)"
+                cell.posLabel.text = "\(index+1)"
+                cell.posLabel.textColor = .systemRed
+                print("Loading for \(id)   \(index)")
                 OpenLibraryApiServiceImpl().loadLargeImage(withId: "\(id)") {result in
                     switch result {
                         case .success(let data):
                             DispatchQueue.main.async {
                                 cell.imageView.image = UIImage(data: data)
-                                cell.titleLabel.text = title
-                                cell.authorLabel.text = author
-                                cell.yearLabel.text = "\(year)"
-                                
                                 cell.activityView.stopAnimating()
                             }
                         case .failure(let error):
