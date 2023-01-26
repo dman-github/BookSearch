@@ -1,1 +1,4 @@
 *.xcbkptlist
+xcschememanagement.plist
+contents.xcworkspacedata
+BookSearch/Pods

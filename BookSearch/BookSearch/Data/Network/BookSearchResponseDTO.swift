@@ -35,3 +35,12 @@ struct BookDTO: Codable {
     }
     
 }
+
+extension BookSearchResponseDTO {
+    func getBooks() -> [BookDTO] {
+        if let docs = self.docs {
+            return docs
+        }
+        return []
+    }
+}
