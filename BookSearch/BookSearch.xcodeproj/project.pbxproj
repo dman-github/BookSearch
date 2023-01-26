@@ -27,6 +27,7 @@
 		09A2EDFC297F05F40078E4E2 /* BookSearchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDFB297F05F40078E4E2 /* BookSearchResponseDTO.swift */; };
 		09B358F7298309DB007B08AC /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B358F6298309DB007B08AC /* ImageCacheService.swift */; };
 		09B358FA29830A5F007B08AC /* ImageCacheService+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */; };
+		09B3590129831610007B08AC /* CoreDataStackMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3590029831610007B08AC /* CoreDataStackMain.swift */; };
 		DAFF6444DAECD3FBED8EB0D5 /* Pods_BookSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F3663610818E4E0EC293CA /* Pods_BookSearch.framework */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		09A2EDFB297F05F40078E4E2 /* BookSearchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchResponseDTO.swift; sourceTree = "<group>"; };
 		09B358F6298309DB007B08AC /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
 		09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCacheService+Protocol.swift"; sourceTree = "<group>"; };
+		09B3590029831610007B08AC /* CoreDataStackMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackMain.swift; sourceTree = "<group>"; };
 		1351882B764680F75EA078B4 /* Pods-BookSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookSearch.release.xcconfig"; path = "Target Support Files/Pods-BookSearch/Pods-BookSearch.release.xcconfig"; sourceTree = "<group>"; };
 		1AD96E380C144C9FE90BE011 /* Pods-BookSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookSearch.debug.xcconfig"; path = "Target Support Files/Pods-BookSearch/Pods-BookSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		94F3663610818E4E0EC293CA /* Pods_BookSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -120,7 +122,6 @@
 				09A2EDE8297EDD930078E4E2 /* Assets.xcassets */,
 				09A2EDEA297EDD930078E4E2 /* LaunchScreen.storyboard */,
 				09A2EDED297EDD930078E4E2 /* Info.plist */,
-				09A2EDE5297EDD8A0078E4E2 /* BookSearch.xcdatamodeld */,
 				090635D229804F57002CE8EB /* Constants.swift */,
 			);
 			path = BookSearch;
@@ -152,8 +153,18 @@
 			children = (
 				09B358F6298309DB007B08AC /* ImageCacheService.swift */,
 				09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */,
+				09B358FB298315BD007B08AC /* CoreDataStack */,
 			);
 			path = Persistance;
+			sourceTree = "<group>";
+		};
+		09B358FB298315BD007B08AC /* CoreDataStack */ = {
+			isa = PBXGroup;
+			children = (
+				09A2EDE5297EDD8A0078E4E2 /* BookSearch.xcdatamodeld */,
+				09B3590029831610007B08AC /* CoreDataStackMain.swift */,
+			);
+			path = CoreDataStack;
 			sourceTree = "<group>";
 		};
 		324981BAB432621A17B4A726 /* Pods */ = {
@@ -298,6 +309,7 @@
 				090635DA2982B3C2002CE8EB /* BookSearchModel.swift in Sources */,
 				090635D329804F57002CE8EB /* Constants.swift in Sources */,
 				090635DC2982BB08002CE8EB /* BookSearchRepository+Protocol.swift in Sources */,
+				09B3590129831610007B08AC /* CoreDataStackMain.swift in Sources */,
 				09A2EDE1297EDD8A0078E4E2 /* BookSearchViewController.swift in Sources */,
 				09B358F7298309DB007B08AC /* ImageCacheService.swift in Sources */,
 				090635DE2982BB26002CE8EB /* BookSearchRepository.swift in Sources */,
