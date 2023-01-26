@@ -53,9 +53,6 @@ class BookSearchModel {
     func clearBooks() {
         books = []
     }
-    
-
-    
 }
 
 extension BookSearchModel {
