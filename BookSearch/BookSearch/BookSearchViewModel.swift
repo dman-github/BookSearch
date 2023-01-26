@@ -92,7 +92,7 @@ extension BookSearchViewModel {
         bookSearchRepository.fetchListOfBooks(forSearchTerm: searchTerm) { result in
             switch result {
                 case .success(let booksDto):
-                    print("Term: \(searchTerm)  number of results :\(booksDto.count)")
+                    print("Creating Model: \(searchTerm)  number of results :\(booksDto.count)")
                     self.createBooks(with: booksDto)
                 case .failure(let error):
                     break
@@ -103,7 +103,6 @@ extension BookSearchViewModel {
     /* if not then a default image is used */
     /* cell update of collection view is also triggered */
     func loadLargeImage(forIndex index: Int) {
-        print("loadingLargeImage")
         guard index < model.size() else {return}
         let coverId = model.getCoverId(forIndex: index)
         if coverId > 0 {

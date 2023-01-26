@@ -50,7 +50,7 @@ extension CoreDataSearchStorage: SearchStorage {
                let object = objects.first,
                let bookEntities = object.bookEntities?.allObjects as? [BookEntity] {
                 let sorted = bookEntities.sorted(by: {$0.rank < $1.rank})
-                print("Found \(bookEntities.count) objects")
+                print("Found \(bookEntities.count) objects in coredata")
                 completion(.success(sorted.map({$0.toDto()})))
             }
         })

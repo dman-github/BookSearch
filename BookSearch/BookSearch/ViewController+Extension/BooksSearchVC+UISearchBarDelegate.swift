@@ -12,8 +12,8 @@ extension BookSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else {return}
         print("Searched Text: \(searchBar.text )")
-        let moo = "Lord of the rings"
-        viewModel.searchForBooks(forSearchTerm: moo)
+        //let moo = "Lord of the rings"
+        viewModel.searchForBooks(forSearchTerm: text)
         self.searchBar.resignFirstResponder()
         /* OpenLibraryApiServiceImpl().searchBooks(with: "The lord of the rings") {[weak self] result in
              switch result {
