@@ -12,9 +12,11 @@ import Foundation
 class BookSearchRepositoryImpl: BookSearchRepository {
     
     private var bookSearchApiService: OpenLibraryApiService
-    
-    init (bookSearchApi: OpenLibraryApiService = OpenLibraryApiServiceImpl()) {
-        bookSearchApiService = bookSearchApi
+    private var cacheService: ImageCacheService
+    init (bookSearchApi: OpenLibraryApiService = OpenLibraryApiServiceImpl(),
+          cacheService: ImageCacheService = ImageCacheServiceImpl()) {
+        self.bookSearchApiService = bookSearchApi
+        self.cacheService = cacheService
     }
     
     func fetchListOfBooks(forSearchTerm searchTerm: String, _ completion: @escaping (Result<[BookDTO], Error>) -> Void) {
@@ -29,12 +31,19 @@ class BookSearchRepositoryImpl: BookSearchRepository {
     }
     
     func fetchLargeImage(forId id: String, _ completion: @escaping (Result<Data, Error>) -> Void) {
-        bookSearchApiService.loadLargeImage(withId: id) {result in
-            switch result {
-                case .success(let data):
-                    completion(.success(data))
-                case .failure(let error):
-                    completion(.failure(error))
+        if let cached = cacheService.retreiveImageFromCache(forImageId: id) {
+            print("fetch from cache \(id)")
+            completion(.success(cached))
+        } else {
+            bookSearchApiService.loadLargeImage(withId: id) {[weak self]result in
+                switch result {
+                    case .success(let data):
+                        /* save the data in cache for next time */
+                        self?.cacheService.saveImageToCache(forImageId: id, withData: data)
+                        completion(.success(data))
+                    case .failure(let error):
+                        completion(.failure(error))
+                }
             }
         }
     }

@@ -25,6 +25,8 @@
 		09A2EDF7297EEBD30078E4E2 /* OpenLibraryApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDF6297EEBD30078E4E2 /* OpenLibraryApiService.swift */; };
 		09A2EDF9297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDF8297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift */; };
 		09A2EDFC297F05F40078E4E2 /* BookSearchResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDFB297F05F40078E4E2 /* BookSearchResponseDTO.swift */; };
+		09B358F7298309DB007B08AC /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B358F6298309DB007B08AC /* ImageCacheService.swift */; };
+		09B358FA29830A5F007B08AC /* ImageCacheService+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */; };
 		DAFF6444DAECD3FBED8EB0D5 /* Pods_BookSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F3663610818E4E0EC293CA /* Pods_BookSearch.framework */; };
 /* End PBXBuildFile section */
 
@@ -49,6 +51,8 @@
 		09A2EDF6297EEBD30078E4E2 /* OpenLibraryApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenLibraryApiService.swift; sourceTree = "<group>"; };
 		09A2EDF8297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "OpenLibraryApiService+Protocol.swift"; sourceTree = "<group>"; };
 		09A2EDFB297F05F40078E4E2 /* BookSearchResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchResponseDTO.swift; sourceTree = "<group>"; };
+		09B358F6298309DB007B08AC /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
+		09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCacheService+Protocol.swift"; sourceTree = "<group>"; };
 		1351882B764680F75EA078B4 /* Pods-BookSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookSearch.release.xcconfig"; path = "Target Support Files/Pods-BookSearch/Pods-BookSearch.release.xcconfig"; sourceTree = "<group>"; };
 		1AD96E380C144C9FE90BE011 /* Pods-BookSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookSearch.debug.xcconfig"; path = "Target Support Files/Pods-BookSearch/Pods-BookSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		94F3663610818E4E0EC293CA /* Pods_BookSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -125,6 +129,7 @@
 		09A2EDF4297EE9C90078E4E2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				09B358F8298309E7007B08AC /* Persistance */,
 				09A2EDF5297EEA1A0078E4E2 /* Network */,
 				090635DB2982BB08002CE8EB /* BookSearchRepository+Protocol.swift */,
 				090635DD2982BB26002CE8EB /* BookSearchRepository.swift */,
@@ -140,6 +145,15 @@
 				09A2EDFB297F05F40078E4E2 /* BookSearchResponseDTO.swift */,
 			);
 			path = Network;
+			sourceTree = "<group>";
+		};
+		09B358F8298309E7007B08AC /* Persistance */ = {
+			isa = PBXGroup;
+			children = (
+				09B358F6298309DB007B08AC /* ImageCacheService.swift */,
+				09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */,
+			);
+			path = Persistance;
 			sourceTree = "<group>";
 		};
 		324981BAB432621A17B4A726 /* Pods */ = {
@@ -280,10 +294,12 @@
 				090635D12980341F002CE8EB /* BooksSearchVC+CollectionViewDataSource.swift in Sources */,
 				09A2EDE7297EDD8A0078E4E2 /* BookSearch.xcdatamodeld in Sources */,
 				09A2EDF9297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift in Sources */,
+				09B358FA29830A5F007B08AC /* ImageCacheService+Protocol.swift in Sources */,
 				090635DA2982B3C2002CE8EB /* BookSearchModel.swift in Sources */,
 				090635D329804F57002CE8EB /* Constants.swift in Sources */,
 				090635DC2982BB08002CE8EB /* BookSearchRepository+Protocol.swift in Sources */,
 				09A2EDE1297EDD8A0078E4E2 /* BookSearchViewController.swift in Sources */,
+				09B358F7298309DB007B08AC /* ImageCacheService.swift in Sources */,
 				090635DE2982BB26002CE8EB /* BookSearchRepository.swift in Sources */,
 				090635D529804FE0002CE8EB /* BookSearchVC+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				090635CD29802F8B002CE8EB /* BookSearchCell.swift in Sources */,
