@@ -11,7 +11,7 @@ import Foundation
 
 class BookSearchRepositoryImpl: BookSearchRepository {
     
-    var bookSearchApiService: OpenLibraryApiService
+    private var bookSearchApiService: OpenLibraryApiService
     
     init (bookSearchApi: OpenLibraryApiService = OpenLibraryApiServiceImpl()) {
         bookSearchApiService = bookSearchApi

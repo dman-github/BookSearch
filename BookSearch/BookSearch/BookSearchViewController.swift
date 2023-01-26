@@ -12,9 +12,10 @@ class BookSearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchBarView: UIView!
     var books: [BookDTO] = []
+    var viewModel: BookSearchViewModel!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        viewModel = BookSearchViewModel()
        /* let service = OpenLibraryApiServiceImpl()
         service.searchBooks(with: "The lord of the rings") {result in
             switch result {

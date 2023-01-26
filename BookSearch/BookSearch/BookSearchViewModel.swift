@@ -7,13 +7,21 @@
 
 import Foundation
 
-func BookSearchViewModel() {
+class BookSearchViewModel {
     
-    let bookSearchRepository = BookSearchRepositoryImpl()
+    private let bookSearchRepository = BookSearchRepositoryImpl()
     
-    func searchForBooks(searchTerm text: String) {
+    func searchForBooks(forSearchTerm searchTerm: String) {
         
-    
+        /* Fetch list of books and save the resulting list in our Model */
+        bookSearchRepository.fetchListOfBooks(forSearchTerm: searchTerm) { result in
+            switch result {
+                case .success(let booksDto):
+                    print("Term: \(searchTerm)  number of results :\(booksDto.count)")
+                case .failure(let error):
+                    break
+            }
+        }
         
     }
     
