@@ -32,7 +32,6 @@ class BookSearchRepositoryImpl: BookSearchRepository {
     
     func fetchLargeImage(forId id: String, _ completion: @escaping (Result<Data, Error>) -> Void) {
         if let cached = cacheService.retreiveImageFromCache(forImageId: id) {
-            print("fetch from cache \(id)")
             completion(.success(cached))
         } else {
             bookSearchApiService.loadLargeImage(withId: id) {[weak self]result in

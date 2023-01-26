@@ -10,7 +10,6 @@ import Foundation
 
 class ImageCacheServiceImpl: ImageCacheService {
     func saveImageToCache(forImageId id: String, withData data: Data) {
-        print("save to cache \(id)")
         cache.setObject(data as NSData, forKey: id as NSString)
     }
     
