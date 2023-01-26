@@ -18,7 +18,7 @@ class BookSearchModel {
     }
     
     func getAuthor(forIndex index: Int) -> String {
-        return books[index].authorName
+        return books[index].authorName.first ?? ""
     }
     
     func getTitle(forIndex index: Int) -> String {
@@ -37,23 +37,36 @@ class BookSearchModel {
         return books[index].isbns
     }
     
-    func getImage(forIndex index: Int) -> Data {
+    func getImage(forIndex index: Int) -> Data? {
         return books[index].imageData
+    }
+    
+    func getImage(forIndex index: Int) -> Bool {
+        return books[index].isLoading
+    }
+    
+    func setBooks(wihtBooks books: [BookModel]) {
+        clearBooks()
+        self.books = books
     }
     
     func clearBooks() {
         books = []
     }
     
+
+    
 }
 
 extension BookSearchModel {
-    private struct BookModel {
+    
+    struct BookModel {
         let title: String
-        let authorName: String
+        let authorName: [String]
         let year: Int
         let coverId: Int
         let isbns: [String]
-        var imageData: Data
+        var imageData: Data?
+        var isLoading: Bool
     }
 }

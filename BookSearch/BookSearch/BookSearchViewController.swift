@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import RxSwift
 
 class BookSearchViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
@@ -13,9 +14,30 @@ class BookSearchViewController: UIViewController {
     @IBOutlet weak var searchBarView: UIView!
     var books: [BookDTO] = []
     var viewModel: BookSearchViewModel!
+    var disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel = BookSearchViewModel()
+        viewModel.reloadCollectionView.subscribe(onNext: {[weak self] (refresh) in
+            if refresh {
+                // This reloads all the collectionview cells
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                }
+            }
+        }).disposed(by: disposeBag)
+        
+        viewModel.reloadCollectionViewAt.subscribe(onNext: {[weak self] (item) in
+            if item > -1 {
+                // This reloads collectionview at a particular cell
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadItems(at: [IndexPath(row: item, section: 0)])
+                }
+            }
+        }).disposed(by: disposeBag)
+        
+        
+        
        /* let service = OpenLibraryApiServiceImpl()
         service.searchBooks(with: "The lord of the rings") {result in
             switch result {
