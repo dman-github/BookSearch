@@ -25,7 +25,6 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
         }
         URLSession.shared.dataTask(with: URLRequest(url: searchURL)) { data, response, error in
             if let error = error {
-                print("URLSession error is \(error.localizedDescription)")
                 completion(.failure(error))
                 return
             }
@@ -63,7 +62,6 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
                     guard let data = data else {return completion(.failure(ServiceError.dataNotRxed))}
                     completion(.success(data))
                 } else {
-                    print(response.statusCode)
                     completion(.failure(ServiceError.networkError))
                 }
             } else {

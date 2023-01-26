@@ -33,7 +33,6 @@ final class CoreDataStackMain {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         }
-        print(">>>>>container")
     }
 
     public func intialise() {

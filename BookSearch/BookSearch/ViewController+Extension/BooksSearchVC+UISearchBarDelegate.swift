@@ -15,19 +15,5 @@ extension BookSearchViewController: UISearchBarDelegate {
         //let moo = "Lord of the rings"
         viewModel.searchForBooks(forSearchTerm: text)
         self.searchBar.resignFirstResponder()
-        /* OpenLibraryApiServiceImpl().searchBooks(with: "The lord of the rings") {[weak self] result in
-             switch result {
-                 case .success(let obj):
-                     if let docs = obj.docs {
-                         self?.books = Array(docs[0..<10])
-                         DispatchQueue.main.async {
-                             self?.collectionView.reloadData()
-                             self?.searchBar.resignFirstResponder()
-                         }
-                     }
-                 case .failure(let error):
-                     print(error.localizedDescription)
-             }
-         }*/
     }
 }
