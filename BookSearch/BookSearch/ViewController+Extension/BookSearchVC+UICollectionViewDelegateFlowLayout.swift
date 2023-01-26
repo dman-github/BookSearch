@@ -25,7 +25,7 @@ extension BookSearchViewController: UICollectionViewDelegateFlowLayout {
       let paddingSpace = Constants.sectionInsets.left * (Constants.itemsPerRow + 1)
       let availableWidth = collectionView.bounds.width - paddingSpace
       let widthPerItem = availableWidth / Constants.itemsPerRow
-        print("widthPerItem :\(widthPerItem)")
+        //print("widthPerItem :\(widthPerItem)")
       return CGSize(width: widthPerItem, height: widthPerItem)
     }
 

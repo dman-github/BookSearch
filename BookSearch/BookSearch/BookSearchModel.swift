@@ -41,8 +41,16 @@ class BookSearchModel {
         return books[index].imageData
     }
     
+    func setImage(forIndex index: Int, withData data: Data?) {
+        books[index].imageData = data
+    }
+    
     func isLoading(forIndex index: Int) -> Bool {
         return books[index].isLoading
+    }
+    
+    func setLoading(forIndex index: Int, to: Bool) {
+        books[index].isLoading = to
     }
     
     func setBooks(wihtBooks books: [BookModel]) {

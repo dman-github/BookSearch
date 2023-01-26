@@ -27,7 +27,12 @@ extension BookSearchViewController: UICollectionViewDataSource {
             cell.yearLabel.text = viewModel.getYearLabel(forIndex: index)
             cell.posLabel.text = viewModel.getPosLabel(forIndex: index)
             cell.posLabel.textColor = .systemRed
-            cell.imageView.image = nil
+            if let data = viewModel.getImageData(forIndex: index) {
+                cell.imageView.image = UIImage(data: data)
+            } else {
+                cell.imageView.image = nil
+            }
+            cell.imageView.contentMode = .scaleAspectFill
             if viewModel.isLoading(forIndex: index) {
                 cell.activityView.startAnimating()
             } else {

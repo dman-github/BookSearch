@@ -28,8 +28,15 @@ class BookSearchRepositoryImpl: BookSearchRepository {
         }
     }
     
-    func fetchLargeImage(forId id: Int, _ completion: @escaping (Result<Data, Error>) -> Void) {
-    
+    func fetchLargeImage(forId id: String, _ completion: @escaping (Result<Data, Error>) -> Void) {
+        bookSearchApiService.loadLargeImage(withId: id) {result in
+            switch result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+            }
+        }
     }
     
     

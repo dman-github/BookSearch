@@ -13,5 +13,5 @@ protocol BookSearchRepository {
     /* Returns the list of Books for the search term  */
     func fetchListOfBooks(forSearchTerm searchTerm: String, _ completion: @escaping (Result<[BookDTO], Error>) -> Void)
     /* Retuns a large image data objet for the given Book id */
-    func fetchLargeImage(forId id: Int, _ completion: @escaping (Result<Data, Error>) -> Void)
+    func fetchLargeImage(forId id: String, _ completion: @escaping (Result<Data, Error>) -> Void)
 }
