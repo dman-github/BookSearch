@@ -41,7 +41,7 @@ class BookSearchModel {
         return books[index].imageData
     }
     
-    func getImage(forIndex index: Int) -> Bool {
+    func isLoading(forIndex index: Int) -> Bool {
         return books[index].isLoading
     }
     

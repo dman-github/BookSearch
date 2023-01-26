@@ -13,7 +13,8 @@ extension BookSearchViewController: UISearchBarDelegate {
         guard let text = searchBar.text, !text.isEmpty else {return}
         print("Searched Text: \(searchBar.text )")
         viewModel.searchForBooks(forSearchTerm: text)
-         OpenLibraryApiServiceImpl().searchBooks(with: "The lord of the rings") {[weak self] result in
+        self.searchBar.resignFirstResponder()
+        /* OpenLibraryApiServiceImpl().searchBooks(with: "The lord of the rings") {[weak self] result in
              switch result {
                  case .success(let obj):
                      if let docs = obj.docs {
@@ -26,6 +27,6 @@ extension BookSearchViewController: UISearchBarDelegate {
                  case .failure(let error):
                      print(error.localizedDescription)
              }
-         }
+         }*/
     }
 }

@@ -30,11 +30,35 @@ class BookSearchViewModel {
     }
     
     func getNumberOfCells() -> Int {
-        return model.size()
+        return Constants.maxCells
     }
     
     func getNumberOfSections() -> Int {
         return 0
+    }
+    
+    func getTitleLabel(forIndex index: Int) -> String {
+        guard index < model.size() else {return ""}
+        return model.getTitle(forIndex: index)
+    }
+    
+    func getAuthorLabel(forIndex index: Int) -> String {
+        guard index < model.size() else {return ""}
+        return model.getAuthor(forIndex: index)
+    }
+    
+    func getYearLabel(forIndex index: Int) -> String {
+        guard index < model.size() else {return ""}
+        return "\(model.getYear(forIndex: index))"
+    }
+    
+    func getPosLabel(forIndex index: Int) -> String {
+        return "\(index + 1)"
+    }
+    
+    func isLoading(forIndex index: Int) -> Bool {
+        guard index < model.size() else {return true}
+        return model.isLoading(forIndex: index)
     }
     
     private func createBooks(with dtos: [BookDTO]) {

@@ -15,12 +15,26 @@ extension BookSearchViewController: UICollectionViewDataSource {
      }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return books.count
+        return viewModel.getNumberOfCells()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "BookSearchCell", for: indexPath) as? BookSearchCell {
+            let index = indexPath.row
             cell.backgroundColor = .black
+            cell.titleLabel.text = viewModel.getTitleLabel(forIndex: index)
+            cell.authorLabel.text = viewModel.getAuthorLabel(forIndex: index)
+            cell.yearLabel.text = viewModel.getYearLabel(forIndex: index)
+            cell.posLabel.text = viewModel.getPosLabel(forIndex: index)
+            cell.posLabel.textColor = .systemRed
+            cell.imageView.image = nil
+            if viewModel.isLoading(forIndex: index) {
+                cell.activityView.startAnimating()
+            } else {
+                cell.activityView.stopAnimating()
+            }
+
+            /*
             if indexPath.row < books.count {
                 let index = indexPath.row
                 let id = books[index].coverId ?? 0
@@ -45,6 +59,7 @@ extension BookSearchViewController: UICollectionViewDataSource {
                     }
                 }
             }
+             */
             return cell
         } else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "BookSearchCell", for: indexPath)
