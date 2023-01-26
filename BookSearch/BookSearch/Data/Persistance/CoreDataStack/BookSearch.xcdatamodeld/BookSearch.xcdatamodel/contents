@@ -3,12 +3,13 @@
     <entity name="BookEntity" representedClassName="BookEntity" syncable="YES" codeGenerationType="class">
         <attribute name="author" optional="YES" attributeType="Transformable" customClassName="[String]"/>
         <attribute name="coverId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="rank" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="title" optional="YES" attributeType="String"/>
         <attribute name="year" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="searchEntity" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SearchEntity" inverseName="bookEntities" inverseEntity="SearchEntity"/>
     </entity>
     <entity name="SearchEntity" representedClassName="SearchEntity" syncable="YES" codeGenerationType="class">
         <attribute name="text" optional="YES" attributeType="String"/>
-        <relationship name="bookEntities" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="BookEntity" inverseName="searchEntity" inverseEntity="BookEntity"/>
+        <relationship name="bookEntities" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="BookEntity" inverseName="searchEntity" inverseEntity="BookEntity"/>
     </entity>
 </model>
