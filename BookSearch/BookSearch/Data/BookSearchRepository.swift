@@ -8,7 +8,7 @@
 import Foundation
 
 
-
+/* The repository contains an instance of the persistant and network framework */
 class BookSearchRepositoryImpl: BookSearchRepository {
     
     private var bookSearchApiService: OpenLibraryApiService
