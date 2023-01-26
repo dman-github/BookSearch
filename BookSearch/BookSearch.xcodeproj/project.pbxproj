@@ -28,6 +28,9 @@
 		09B358F7298309DB007B08AC /* ImageCacheService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B358F6298309DB007B08AC /* ImageCacheService.swift */; };
 		09B358FA29830A5F007B08AC /* ImageCacheService+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */; };
 		09B3590129831610007B08AC /* CoreDataStackMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3590029831610007B08AC /* CoreDataStackMain.swift */; };
+		09B3590329831BA2007B08AC /* CoreDataSearchStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3590229831BA2007B08AC /* CoreDataSearchStorage.swift */; };
+		09B3590529831BCC007B08AC /* SearchStorage+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3590429831BCC007B08AC /* SearchStorage+Protocol.swift */; };
+		09B3590729832152007B08AC /* SearchStorage+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09B3590629832152007B08AC /* SearchStorage+Mapping.swift */; };
 		DAFF6444DAECD3FBED8EB0D5 /* Pods_BookSearch.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94F3663610818E4E0EC293CA /* Pods_BookSearch.framework */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +58,9 @@
 		09B358F6298309DB007B08AC /* ImageCacheService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheService.swift; sourceTree = "<group>"; };
 		09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ImageCacheService+Protocol.swift"; sourceTree = "<group>"; };
 		09B3590029831610007B08AC /* CoreDataStackMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStackMain.swift; sourceTree = "<group>"; };
+		09B3590229831BA2007B08AC /* CoreDataSearchStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataSearchStorage.swift; sourceTree = "<group>"; };
+		09B3590429831BCC007B08AC /* SearchStorage+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchStorage+Protocol.swift"; sourceTree = "<group>"; };
+		09B3590629832152007B08AC /* SearchStorage+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchStorage+Mapping.swift"; sourceTree = "<group>"; };
 		1351882B764680F75EA078B4 /* Pods-BookSearch.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookSearch.release.xcconfig"; path = "Target Support Files/Pods-BookSearch/Pods-BookSearch.release.xcconfig"; sourceTree = "<group>"; };
 		1AD96E380C144C9FE90BE011 /* Pods-BookSearch.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BookSearch.debug.xcconfig"; path = "Target Support Files/Pods-BookSearch/Pods-BookSearch.debug.xcconfig"; sourceTree = "<group>"; };
 		94F3663610818E4E0EC293CA /* Pods_BookSearch.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BookSearch.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -154,6 +160,9 @@
 				09B358F6298309DB007B08AC /* ImageCacheService.swift */,
 				09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */,
 				09B358FB298315BD007B08AC /* CoreDataStack */,
+				09B3590229831BA2007B08AC /* CoreDataSearchStorage.swift */,
+				09B3590429831BCC007B08AC /* SearchStorage+Protocol.swift */,
+				09B3590629832152007B08AC /* SearchStorage+Mapping.swift */,
 			);
 			path = Persistance;
 			sourceTree = "<group>";
@@ -315,8 +324,11 @@
 				090635DE2982BB26002CE8EB /* BookSearchRepository.swift in Sources */,
 				090635D529804FE0002CE8EB /* BookSearchVC+UICollectionViewDelegateFlowLayout.swift in Sources */,
 				090635CD29802F8B002CE8EB /* BookSearchCell.swift in Sources */,
+				09B3590329831BA2007B08AC /* CoreDataSearchStorage.swift in Sources */,
 				090635CF298032DA002CE8EB /* BooksSearchVC+UISearchBarDelegate.swift in Sources */,
 				09A2EDDD297EDD8A0078E4E2 /* AppDelegate.swift in Sources */,
+				09B3590729832152007B08AC /* SearchStorage+Mapping.swift in Sources */,
+				09B3590529831BCC007B08AC /* SearchStorage+Protocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
