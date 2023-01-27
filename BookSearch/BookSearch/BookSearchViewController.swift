@@ -51,6 +51,26 @@ class BookSearchViewController: UIViewController {
             }
         }).disposed(by: disposeBag)
         
+        viewModel.searchResultsRx.subscribe(onNext: {[weak self] (rx) in
+            if rx {
+                // This turns off the spinner
+                DispatchQueue.main.async {
+                    self?.blurEffectView.isHidden = true
+                    self?.searchSpinner.stopAnimating()
+                }
+            }
+        }).disposed(by: disposeBag)
+        
+        viewModel.showMessage.subscribe(onNext: {[weak self] (msg) in
+            if !msg.isEmpty {
+                DispatchQueue.main.async {
+                    let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: UIAlertController.Style.alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                    self?.present(alert, animated: true, completion: nil)
+                }
+            }
+        }).disposed(by: disposeBag)
+        
         func setupBlurEffectView() {
             let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
             blurEffectView.effect = blurEffect
@@ -60,7 +80,7 @@ class BookSearchViewController: UIViewController {
         }
         
         func setupSearchBar() {
-            var textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+            let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
             textFieldInsideSearchBar?.backgroundColor = .white
 
         }

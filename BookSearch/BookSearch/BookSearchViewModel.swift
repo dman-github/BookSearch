@@ -16,7 +16,7 @@ class BookSearchViewModel {
     let reloadCollectionView: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     let reloadCollectionViewAt: BehaviorRelay<[Int]> = BehaviorRelay(value: [])
     let searchResultsRx: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    
+    let showMessage: BehaviorRelay<String> = BehaviorRelay(value: "")
     func getImageData(forIndex index: Int) -> Data? {
         guard index < model.size() else {return nil}
         if let imageData = model.getImage(forIndex: index) {
@@ -170,8 +170,11 @@ extension BookSearchViewModel {
                     } else {
                         self.createBooks(with: booksDto)
                     }
-                case .failure(let error):
-                    break
+                    if booksDto.count == 0 {
+                        self.showMessage.accept("No searches found please try again")
+                    }
+                case .failure(_):
+                    self.showMessage.accept("Network error please try again")
             }
         }
 
@@ -189,7 +192,7 @@ extension BookSearchViewModel {
                         self?.model.setImage(forIndex: index, withData: data)
                         self?.model.setLoading(forIndex: index, to: false)
                         self?.notifyCollectionView(atIndex: index)
-                    case .failure(let error):
+                    case .failure(_):
                         break
                 }
             }
