@@ -52,6 +52,8 @@ extension CoreDataSearchStorage: SearchStorage {
                 let sorted = bookEntities.sorted(by: {$0.rank < $1.rank})
                 print("Found \(bookEntities.count) objects in coredata")
                 completion(.success(sorted.map({$0.toDto()})))
+            } else {
+                completion(.failure(CoreDataStorageError.noData))
             }
         })
     }
