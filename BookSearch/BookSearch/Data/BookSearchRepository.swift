@@ -23,16 +23,20 @@ class BookSearchRepositoryImpl: BookSearchRepository {
     }
     
     func fetchListOfBooks(forSearchTerm searchTerm: String,
+                          _ cache: @escaping (Result<[BookDTO], Error>) -> Void,
                           _ completion: @escaping (Result<[BookDTO], Error>) -> Void) {
-        searchStorage.getSearchResults(forSearchTerm: searchTerm) { result in
-            switch result {
-                case .success(let books):
-                    print("books from coredata cache")
-                    completion(.success(books))
-                case .failure(let error):
-                    completion(.failure(error))
+        searchStorage.getSearchResults(forSearchTerm: searchTerm) {[weak self] result in
+            if case .success(let books) = result {
+                cache(.success(books))
             }
+            /* Tne cache is first sent to the View layers then the api call is made to get a new list from the
+             search terms */
+            self?.fetchListOfBooksFromApi(forSearchTerm: searchTerm, completion)
         }
+    }
+    
+    private func fetchListOfBooksFromApi(forSearchTerm searchTerm: String,
+                                         _ completion: @escaping (Result<[BookDTO], Error>) -> Void) {
         bookSearchApiService.searchBooks(with: searchTerm) {[weak self] result in
             switch result {
                 case .success(let dto):
@@ -40,6 +44,7 @@ class BookSearchRepositoryImpl: BookSearchRepository {
                     self?.searchStorage.saveSearch(forSearchTerm: searchTerm, books: books) { result in
                         switch result {
                             case .success(_):
+                                print("books from api call :\(books.count)")
                                 completion(.success(books))
                             case .failure(let error):
                                 completion(.failure(error))

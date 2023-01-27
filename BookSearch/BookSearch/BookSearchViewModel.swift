@@ -14,7 +14,7 @@ class BookSearchViewModel {
     private let bookSearchRepository = BookSearchRepositoryImpl()
     private let model = BookSearchModel()
     let reloadCollectionView: BehaviorRelay<Bool> = BehaviorRelay(value: false)
-    let reloadCollectionViewAt: BehaviorRelay<Int> = BehaviorRelay(value: -1)
+    let reloadCollectionViewAt: BehaviorRelay<[Int]> = BehaviorRelay(value: [])
     
     func getImageData(forIndex index: Int) -> Data? {
         guard index < model.size() else {return nil}
@@ -61,6 +61,9 @@ class BookSearchViewModel {
         return model.isLoading(forIndex: index)
     }
     
+    
+    /* This creates a new set of model objects */
+    /* Signals the VC to update all cells of the collection view */
     private func createBooks(with dtos: [BookDTO]) {
         let books = dtos.map { dto in
             let authors = dto.authorName ?? []
@@ -79,7 +82,34 @@ class BookSearchViewModel {
         }
         model.setBooks(wihtBooks: books)
         // Send signal to VC to update collectionView
+        print("Create all rows")
         reloadCollectionView.accept(true)
+    }
+    
+    /* To prevent unnecessary flickering during cell updates */
+    private func updateBooks(with dtos: [BookDTO]) {
+        var rowsToUpdate: [Int] = []
+        for (i,dto) in dtos.enumerated() {
+            let authors = dto.authorName ?? []
+            let id = dto.coverId ?? -1
+            let title = dto.title ?? ""
+            let firstYear = dto.firstPublishedYear ?? 0
+            let isbns = dto.isbn ?? []
+            // check if the id of the model is the same if not we replace it and save the row
+            if id != model.getCoverId(forIndex: i)  {
+                let model = BookSearchModel.BookModel(title: title,
+                                      authorName: authors,
+                                      year: firstYear,
+                                      coverId: id,
+                                      isbns: isbns,
+                                      imageData: nil,
+                                      isLoading: true)
+                self.model.setBook(withBook: model, at: i)
+                rowsToUpdate.append(i)
+            }
+        }
+        print("rows to update\(rowsToUpdate)")
+        reloadCollectionViewAt.accept(rowsToUpdate)
     }
 }
 
@@ -89,15 +119,30 @@ extension BookSearchViewModel {
     func searchForBooks(forSearchTerm searchTerm: String) {
         
         /* Fetch list of books and save the resulting list in our Model */
-        bookSearchRepository.fetchListOfBooks(forSearchTerm: searchTerm) { result in
-            switch result {
+        bookSearchRepository.fetchListOfBooks(forSearchTerm: searchTerm) {[weak self] cached in
+            guard let self = self else {return}
+            switch cached {
                 case .success(let booksDto):
                     print("Creating Model: \(searchTerm)  number of results :\(booksDto.count)")
                     self.createBooks(with: booksDto)
                 case .failure(let error):
                     break
             }
+        } _: { results in
+            switch results {
+                case .success(let booksDto):
+                    print("Update Model: \(searchTerm)  number of results :\(booksDto.count)")
+                    /* If the model is empty we need to create a new model with all the cells updated */
+                    if self.model.size() > 0 {
+                        self.updateBooks(with: booksDto)
+                    } else {
+                        self.createBooks(with: booksDto)
+                    }
+                case .failure(let error):
+                    break
+            }
         }
+
     }
     /* we first check whether the imageId is present for the specific search result */
     /* if not then a default image is used */
@@ -127,7 +172,7 @@ extension BookSearchViewModel {
     
     func notifyCollectionView(atIndex index: Int) {
         DispatchQueue.main.async { [weak self] in
-            self?.reloadCollectionViewAt.accept(index)
+            self?.reloadCollectionViewAt.accept([index])
         }
     }
     

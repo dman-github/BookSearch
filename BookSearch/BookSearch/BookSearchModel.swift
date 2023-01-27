@@ -58,6 +58,10 @@ class BookSearchModel {
         self.books = books
     }
     
+    func setBook(withBook book: BookModel, at index: Int) {
+        books[index] = book
+    }
+    
     func clearBooks() {
         books = []
     }
