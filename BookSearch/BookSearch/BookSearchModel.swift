@@ -12,6 +12,8 @@ import Foundation
 class BookSearchModel {
     
     private var books: [BookModel] = []
+    private var selectedIndex: Int = -1
+    private var peviousSelectedIndex: Int = -1
     
     func size() -> Int {
         return books.count
@@ -19,6 +21,10 @@ class BookSearchModel {
     
     func getAuthor(forIndex index: Int) -> String {
         return books[index].authorName.first ?? ""
+    }
+    
+    func getAuthors(forIndex index: Int) -> String {
+        return books[index].authorName.joined(separator: ",")
     }
     
     func getTitle(forIndex index: Int) -> String {
@@ -60,6 +66,22 @@ class BookSearchModel {
     
     func setBook(withBook book: BookModel, at index: Int) {
         books[index] = book
+    }
+    
+    func selectedIndex(to index: Int) {
+        selectedIndex = index
+    }
+    
+    func getSelectedIndex() -> Int {
+        return selectedIndex
+    }
+    
+    func setPreviousSelectedIndex(to index: Int) {
+        peviousSelectedIndex = index
+    }
+    
+    func getPreviousSelectedIndex() -> Int {
+        return peviousSelectedIndex
     }
     
     func clearBooks() {
