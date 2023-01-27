@@ -32,43 +32,31 @@ extension BookSearchViewController: UICollectionViewDataSource {
             } else {
                 cell.imageView.image = nil
             }
-            cell.imageView.contentMode = .scaleAspectFill
+            if index == viewModel.getSelectedIndex() {
+                cell.imageView.contentMode = .scaleAspectFit
+            } else {
+                cell.imageView.contentMode = .scaleAspectFill
+            }
             if viewModel.isLoading(forIndex: index) {
                 cell.activityView.startAnimating()
             } else {
                 cell.activityView.stopAnimating()
             }
-
-            /*
-            if indexPath.row < books.count {
-                let index = indexPath.row
-                let id = books[index].coverId ?? 0
-                let title = books[index].title ?? ""
-                let author = books[index].authorName?.first ?? ""
-                let year = books[index].firstPublishedYear ?? 0
-                cell.titleLabel.text = title
-                cell.authorLabel.text = author
-                cell.yearLabel.text = "\(year)"
-                cell.posLabel.text = "\(index+1)"
-                cell.posLabel.textColor = .systemRed
-                print("Loading for \(id)   \(index)")
-                OpenLibraryApiServiceImpl().loadLargeImage(withId: "\(id)") {result in
-                    switch result {
-                        case .success(let data):
-                            DispatchQueue.main.async {
-                                cell.imageView.image = UIImage(data: data)
-                                cell.activityView.stopAnimating()
-                            }
-                        case .failure(let error):
-                            print("\(error) \(indexPath.row)")
-                    }
-                }
-            }
-             */
             return cell
         } else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: "BookSearchCell", for: indexPath)
         }
+    }
+    
+    func collectionView(
+      _ collectionView: UICollectionView,
+      shouldSelectItemAt indexPath: IndexPath
+    ) -> Bool {
+        viewModel.setSelectedCell(index: indexPath.row)
+        let indexPaths = viewModel.getIndexesToUpdateAfterSelection().map({IndexPath(row: $0, section: 0)})
+        collectionView.reloadItems(at: indexPaths)
+        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        return true
     }
     
     

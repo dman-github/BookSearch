@@ -22,11 +22,14 @@ extension BookSearchViewController: UICollectionViewDelegateFlowLayout {
       layout collectionViewLayout: UICollectionViewLayout,
       sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-      let paddingSpace = Constants.sectionInsets.left * (Constants.itemsPerRow + 1)
-      let availableWidth = collectionView.bounds.width - paddingSpace
-      let widthPerItem = availableWidth / Constants.itemsPerRow
-        //print("widthPerItem :\(widthPerItem)")
-      return CGSize(width: widthPerItem, height: widthPerItem)
+        var itemsPerRow = Constants.itemsPerRow
+        if indexPath.row == viewModel.getSelectedIndex() {
+            itemsPerRow = 1
+        }
+        let paddingSpace = Constants.sectionInsets.left * (itemsPerRow + 1)
+        let availableWidth = collectionView.bounds.width - paddingSpace
+        let widthPerItem = availableWidth / itemsPerRow
+        return CGSize(width: widthPerItem, height: widthPerItem)
     }
 
     func collectionView(

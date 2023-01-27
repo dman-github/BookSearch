@@ -26,40 +26,26 @@ class BookSearchViewModel {
         self.loadLargeImage(forIndex: index)
         return nil
     }
+
+    func setSelectedCell(index: Int) {
+        /* Save the current and previous selected Indices */
+        let current = self.model.getSelectedIndex()
+        self.model.selectedIndex(to: index)
+        self.model.setPreviousSelectedIndex(to: current)
+    }
     
-    func getNumberOfCells() -> Int {
-        if model.size() < Constants.maxCells {
-            return model.size()
+    func getSelectedIndex() -> Int {
+        return self.model.getSelectedIndex()
+    }
+    
+    func getIndexesToUpdateAfterSelection() -> [Int] {
+        /* Get the current and previous indicies, they both need to be updated */
+        var indexes: [Int] = []
+        indexes.append(model.getSelectedIndex())
+        if model.getPreviousSelectedIndex() > -1 {
+            indexes.append(model.getPreviousSelectedIndex())
         }
-        return Constants.maxCells
-    }
-    
-    func getNumberOfSections() -> Int {
-        return 0
-    }
-    
-    func getTitleLabel(forIndex index: Int) -> String {
-        guard index < model.size() else {return ""}
-        return model.getTitle(forIndex: index)
-    }
-    
-    func getAuthorLabel(forIndex index: Int) -> String {
-        guard index < model.size() else {return ""}
-        return model.getAuthor(forIndex: index)
-    }
-    
-    func getYearLabel(forIndex index: Int) -> String {
-        guard index < model.size() else {return ""}
-        return "\(model.getYear(forIndex: index))"
-    }
-    
-    func getPosLabel(forIndex index: Int) -> String {
-        return "\(index + 1)"
-    }
-    
-    func isLoading(forIndex index: Int) -> Bool {
-        guard index < model.size() else {return true}
-        return model.isLoading(forIndex: index)
+        return indexes
     }
     
     
@@ -111,6 +97,52 @@ class BookSearchViewModel {
         }
         print("rows to update\(rowsToUpdate)")
         reloadCollectionViewAt.accept(rowsToUpdate)
+    }
+}
+
+// MARK: Collection Cell Population
+extension BookSearchViewModel {
+    
+    func getTitleLabel(forIndex index: Int) -> String {
+        guard index < model.size() else {return ""}
+        return model.getTitle(forIndex: index)
+    }
+    
+    func getAuthorLabel(forIndex index: Int) -> String {
+        guard index < model.size() else {return ""}
+        if index == model.getSelectedIndex() {
+            return model.getAuthors(forIndex: index)
+        } else {
+            return model.getAuthor(forIndex: index)
+        }
+    }
+    
+    func getYearLabel(forIndex index: Int) -> String {
+        guard index < model.size() else {return ""}
+        return "\(model.getYear(forIndex: index))"
+    }
+    
+    func getPosLabel(forIndex index: Int) -> String {
+        return "\(index + 1)"
+    }
+    
+    func isLoading(forIndex index: Int) -> Bool {
+        guard index < model.size() else {return true}
+        return model.isLoading(forIndex: index)
+    }
+}
+
+// MARK: Collection view dimensions
+extension BookSearchViewModel {
+    func getNumberOfCells() -> Int {
+        if model.size() < Constants.maxCells {
+            return model.size()
+        }
+        return Constants.maxCells
+    }
+    
+    func getNumberOfSections() -> Int {
+        return 0
     }
 }
 

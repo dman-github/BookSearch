@@ -13,6 +13,7 @@ extension BookSearchViewController: UISearchBarDelegate {
         guard let text = searchBar.text, !text.isEmpty else {return}
         print("Searched Text: \(searchBar.text )")
         //let moo = "Lord of the rings"
+        viewModel.setSelectedCell(index: -1)
         viewModel.searchForBooks(forSearchTerm: text)
         self.searchSpinner.startAnimating()
         self.blurEffectView.isHidden = false
