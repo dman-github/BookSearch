@@ -27,11 +27,12 @@ class BookSearchViewController: UIViewController {
             }
         }).disposed(by: disposeBag)
         
-        viewModel.reloadCollectionViewAt.subscribe(onNext: {[weak self] (item) in
-            if item > -1 {
+        viewModel.reloadCollectionViewAt.subscribe(onNext: {[weak self] (items) in
+            if items.count > 0 {
+                let rows = items.map({IndexPath(row: $0, section: 0)})
                 // This reloads collectionview at a particular cell
                 DispatchQueue.main.async {
-                    self?.collectionView.reloadItems(at: [IndexPath(row: item, section: 0)])
+                    self?.collectionView.reloadItems(at: rows)
                 }
             }
         }).disposed(by: disposeBag)
