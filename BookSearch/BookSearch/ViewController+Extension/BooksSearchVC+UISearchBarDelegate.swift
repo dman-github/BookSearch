@@ -14,6 +14,7 @@ extension BookSearchViewController: UISearchBarDelegate {
         print("Searched Text: \(searchBar.text )")
         //let moo = "Lord of the rings"
         viewModel.searchForBooks(forSearchTerm: text)
+        self.searchSpinner.startAnimating()
         self.searchBar.resignFirstResponder()
     }
 }

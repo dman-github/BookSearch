@@ -12,6 +12,7 @@ class BookSearchViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchBarView: UIView!
+    @IBOutlet weak var searchSpinner: UIActivityIndicatorView!
     var books: [BookDTO] = []
     var viewModel: BookSearchViewModel!
     var disposeBag = DisposeBag()
@@ -33,6 +34,15 @@ class BookSearchViewController: UIViewController {
                 // This reloads collectionview at a particular cell
                 DispatchQueue.main.async {
                     self?.collectionView.reloadItems(at: rows)
+                }
+            }
+        }).disposed(by: disposeBag)
+        
+        viewModel.searchResultsRx.subscribe(onNext: {[weak self] (rx) in
+            if rx {
+                // This turns off the spinner
+                DispatchQueue.main.async {
+                    self?.searchSpinner.stopAnimating()
                 }
             }
         }).disposed(by: disposeBag)

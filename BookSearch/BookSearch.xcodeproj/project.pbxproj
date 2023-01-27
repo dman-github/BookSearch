@@ -157,12 +157,9 @@
 		09B358F8298309E7007B08AC /* Persistance */ = {
 			isa = PBXGroup;
 			children = (
-				09B358F6298309DB007B08AC /* ImageCacheService.swift */,
-				09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */,
+				09B3590929842AD2007B08AC /* SearchStorage */,
+				09B3590829842ABB007B08AC /* ImageStorage */,
 				09B358FB298315BD007B08AC /* CoreDataStack */,
-				09B3590229831BA2007B08AC /* CoreDataSearchStorage.swift */,
-				09B3590429831BCC007B08AC /* SearchStorage+Protocol.swift */,
-				09B3590629832152007B08AC /* SearchStorage+Mapping.swift */,
 			);
 			path = Persistance;
 			sourceTree = "<group>";
@@ -174,6 +171,25 @@
 				09B3590029831610007B08AC /* CoreDataStackMain.swift */,
 			);
 			path = CoreDataStack;
+			sourceTree = "<group>";
+		};
+		09B3590829842ABB007B08AC /* ImageStorage */ = {
+			isa = PBXGroup;
+			children = (
+				09B358F929830A5F007B08AC /* ImageCacheService+Protocol.swift */,
+				09B358F6298309DB007B08AC /* ImageCacheService.swift */,
+			);
+			path = ImageStorage;
+			sourceTree = "<group>";
+		};
+		09B3590929842AD2007B08AC /* SearchStorage */ = {
+			isa = PBXGroup;
+			children = (
+				09B3590229831BA2007B08AC /* CoreDataSearchStorage.swift */,
+				09B3590429831BCC007B08AC /* SearchStorage+Protocol.swift */,
+				09B3590629832152007B08AC /* SearchStorage+Mapping.swift */,
+			);
+			path = SearchStorage;
 			sourceTree = "<group>";
 		};
 		324981BAB432621A17B4A726 /* Pods */ = {

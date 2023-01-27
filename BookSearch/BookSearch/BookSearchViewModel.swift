@@ -15,6 +15,7 @@ class BookSearchViewModel {
     private let model = BookSearchModel()
     let reloadCollectionView: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     let reloadCollectionViewAt: BehaviorRelay<[Int]> = BehaviorRelay(value: [])
+    let searchResultsRx: BehaviorRelay<Bool> = BehaviorRelay(value: false)
     
     func getImageData(forIndex index: Int) -> Data? {
         guard index < model.size() else {return nil}
@@ -121,14 +122,13 @@ extension BookSearchViewModel {
         /* Fetch list of books and save the resulting list in our Model */
         bookSearchRepository.fetchListOfBooks(forSearchTerm: searchTerm) {[weak self] cached in
             guard let self = self else {return}
-            switch cached {
-                case .success(let booksDto):
-                    print("Creating Model: \(searchTerm)  number of results :\(booksDto.count)")
-                    self.createBooks(with: booksDto)
-                case .failure(let error):
-                    break
+            if case .success(let booksDto) = cached {
+                print("Creating Model: \(searchTerm)  number of results :\(booksDto.count)")
+                self.createBooks(with: booksDto)
+                self.searchResultsRx.accept(true)
             }
         } _: { results in
+            self.searchResultsRx.accept(true)
             switch results {
                 case .success(let booksDto):
                     print("Update Model: \(searchTerm)  number of results :\(booksDto.count)")

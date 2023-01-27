@@ -157,6 +157,10 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="wte-fn-1CK"/>
                                 </connections>
                             </collectionView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="vH8-za-bIl">
+                                <rect key="frame" x="0.0" y="159" width="393" height="659"/>
+                                <color key="color" systemColor="systemRedColor"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -164,16 +168,21 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DuO-fU-i92" secondAttribute="bottom" id="2TQ-TY-ddQ"/>
                             <constraint firstItem="SZE-w6-mWB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3ON-YF-juI"/>
                             <constraint firstItem="DuO-fU-i92" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5L3-w5-LU5"/>
+                            <constraint firstItem="vH8-za-bIl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="JLc-ex-PYh"/>
+                            <constraint firstItem="vH8-za-bIl" firstAttribute="top" secondItem="SZE-w6-mWB" secondAttribute="bottom" id="S3x-zL-vQw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DuO-fU-i92" secondAttribute="trailing" id="XiB-Rb-Row"/>
                             <constraint firstItem="SZE-w6-mWB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ax8-4T-Y3G"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vH8-za-bIl" secondAttribute="bottom" id="eD4-nY-wL8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SZE-w6-mWB" secondAttribute="trailing" id="gbx-Qe-7WA"/>
                             <constraint firstItem="DuO-fU-i92" firstAttribute="top" secondItem="SZE-w6-mWB" secondAttribute="bottom" id="mOc-9U-KGX"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="vH8-za-bIl" secondAttribute="trailing" id="umY-nv-cbi"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="DuO-fU-i92" id="moy-84-qVn"/>
                         <outlet property="searchBar" destination="Rra-Vm-6Qz" id="hj1-ZC-90b"/>
                         <outlet property="searchBarView" destination="SZE-w6-mWB" id="xCZ-OI-lL7"/>
+                        <outlet property="searchSpinner" destination="vH8-za-bIl" id="eiK-OH-9vT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
