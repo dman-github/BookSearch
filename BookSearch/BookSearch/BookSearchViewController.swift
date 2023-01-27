@@ -20,6 +20,7 @@ class BookSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBlurEffectView()
+        setupSearchBar()
         viewModel = BookSearchViewModel()
         viewModel.reloadCollectionView.subscribe(onNext: {[weak self] (refresh) in
             if refresh {
@@ -56,6 +57,12 @@ class BookSearchViewController: UIViewController {
             blurEffectView.backgroundColor = .white
             blurEffectView.alpha = 0.5
             blurEffectView.isHidden = true
+        }
+        
+        func setupSearchBar() {
+            var textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+            textFieldInsideSearchBar?.backgroundColor = .white
+
         }
         
        /* let service = OpenLibraryApiServiceImpl()

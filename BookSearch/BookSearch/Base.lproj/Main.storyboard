@@ -21,12 +21,13 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SZE-w6-mWB" userLabel="SearchBarView">
                                 <rect key="frame" x="0.0" y="59" width="393" height="100"/>
                                 <subviews>
-                                    <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Rra-Vm-6Qz">
+                                    <searchBar contentMode="redraw" placeholder="Search for Books...." translatesAutoresizingMaskIntoConstraints="NO" id="Rra-Vm-6Qz">
                                         <rect key="frame" x="46.666666666666657" y="28" width="300" height="44"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="44" id="3e4-Zi-P6F"/>
                                             <constraint firstAttribute="width" constant="300" id="sh7-px-EHi"/>
                                         </constraints>
+                                        <color key="barTintColor" systemColor="systemRedColor"/>
                                         <textInputTraits key="textInputTraits"/>
                                         <connections>
                                             <outlet property="delegate" destination="BYZ-38-t0r" id="ef1-zv-Umz"/>
