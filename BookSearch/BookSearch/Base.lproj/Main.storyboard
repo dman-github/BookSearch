@@ -157,6 +157,15 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="wte-fn-1CK"/>
                                 </connections>
                             </collectionView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NNg-tm-fja">
+                                <rect key="frame" x="0.0" y="159" width="393" height="659"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="ux7-Wi-tSn">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="659"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="vH8-za-bIl">
                                 <rect key="frame" x="0.0" y="159" width="393" height="659"/>
                                 <color key="color" systemColor="systemRedColor"/>
@@ -167,10 +176,14 @@
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="DuO-fU-i92" secondAttribute="bottom" id="2TQ-TY-ddQ"/>
                             <constraint firstItem="SZE-w6-mWB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="3ON-YF-juI"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="NNg-tm-fja" secondAttribute="bottom" id="54x-Gm-X7w"/>
                             <constraint firstItem="DuO-fU-i92" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="5L3-w5-LU5"/>
+                            <constraint firstItem="NNg-tm-fja" firstAttribute="top" secondItem="SZE-w6-mWB" secondAttribute="bottom" id="88U-Ra-pFj"/>
                             <constraint firstItem="vH8-za-bIl" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="JLc-ex-PYh"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="NNg-tm-fja" secondAttribute="trailing" id="OFk-Bn-hLk"/>
                             <constraint firstItem="vH8-za-bIl" firstAttribute="top" secondItem="SZE-w6-mWB" secondAttribute="bottom" id="S3x-zL-vQw"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DuO-fU-i92" secondAttribute="trailing" id="XiB-Rb-Row"/>
+                            <constraint firstItem="NNg-tm-fja" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YCY-4a-ojc"/>
                             <constraint firstItem="SZE-w6-mWB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ax8-4T-Y3G"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="vH8-za-bIl" secondAttribute="bottom" id="eD4-nY-wL8"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SZE-w6-mWB" secondAttribute="trailing" id="gbx-Qe-7WA"/>
@@ -179,6 +192,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="blurEffectView" destination="NNg-tm-fja" id="PVR-Eh-Snn"/>
                         <outlet property="collectionView" destination="DuO-fU-i92" id="moy-84-qVn"/>
                         <outlet property="searchBar" destination="Rra-Vm-6Qz" id="hj1-ZC-90b"/>
                         <outlet property="searchBarView" destination="SZE-w6-mWB" id="xCZ-OI-lL7"/>

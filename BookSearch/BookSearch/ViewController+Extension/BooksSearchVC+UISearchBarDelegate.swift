@@ -15,6 +15,7 @@ extension BookSearchViewController: UISearchBarDelegate {
         //let moo = "Lord of the rings"
         viewModel.searchForBooks(forSearchTerm: text)
         self.searchSpinner.startAnimating()
+        self.blurEffectView.isHidden = false
         self.searchBar.resignFirstResponder()
     }
 }

@@ -12,12 +12,14 @@ class BookSearchViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var searchBarView: UIView!
+    @IBOutlet weak var blurEffectView: UIVisualEffectView!
     @IBOutlet weak var searchSpinner: UIActivityIndicatorView!
     var books: [BookDTO] = []
     var viewModel: BookSearchViewModel!
     var disposeBag = DisposeBag()
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupBlurEffectView()
         viewModel = BookSearchViewModel()
         viewModel.reloadCollectionView.subscribe(onNext: {[weak self] (refresh) in
             if refresh {
@@ -42,12 +44,19 @@ class BookSearchViewController: UIViewController {
             if rx {
                 // This turns off the spinner
                 DispatchQueue.main.async {
+                    self?.blurEffectView.isHidden = true
                     self?.searchSpinner.stopAnimating()
                 }
             }
         }).disposed(by: disposeBag)
         
-        
+        func setupBlurEffectView() {
+            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
+            blurEffectView.effect = blurEffect
+            blurEffectView.backgroundColor = .white
+            blurEffectView.alpha = 0.5
+            blurEffectView.isHidden = true
+        }
         
        /* let service = OpenLibraryApiServiceImpl()
         service.searchBooks(with: "The lord of the rings") {result in
