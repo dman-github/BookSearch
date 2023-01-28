@@ -27,16 +27,20 @@ extension BookSearchViewController: UICollectionViewDataSource {
             cell.yearLabel.text = viewModel.getYearLabel(forIndex: index)
             cell.posLabel.text = viewModel.getPosLabel(forIndex: index)
             cell.posLabel.textColor = .systemRed
+            // If an image is present we display it otherwise the default is a white view.
             if let data = viewModel.getImageData(forIndex: index) {
                 cell.imageView.image = UIImage(data: data)
             } else {
                 cell.imageView.image = nil
             }
+            // if the cell is small then the contentMode is aspectFill
+            // if the cell is large then there is more room to have aspectFit
             if index == viewModel.getSelectedIndex() {
                 cell.imageView.contentMode = .scaleAspectFit
             } else {
                 cell.imageView.contentMode = .scaleAspectFill
             }
+            // loading spinner during the seaching
             if viewModel.isLoading(forIndex: index) {
                 cell.activityView.startAnimating()
             } else {
@@ -52,6 +56,7 @@ extension BookSearchViewController: UICollectionViewDataSource {
       _ collectionView: UICollectionView,
       shouldSelectItemAt indexPath: IndexPath
     ) -> Bool {
+        // When change selection item we must update the current and previous cells of the collection view
         viewModel.setSelectedCell(index: indexPath.row)
         let indexPaths = viewModel.getIndexesToUpdateAfterSelection().map({IndexPath(row: $0, section: 0)})
         collectionView.reloadItems(at: indexPaths)

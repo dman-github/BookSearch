@@ -69,7 +69,6 @@ class BookSearchViewModel {
         }
         model.setBooks(wihtBooks: books)
         // Send signal to VC to update collectionView
-        print("Create all rows")
         reloadCollectionView.accept(true)
     }
     
@@ -95,7 +94,6 @@ class BookSearchViewModel {
                 rowsToUpdate.append(i)
             }
         }
-        print("rows to update\(rowsToUpdate)")
         reloadCollectionViewAt.accept(rowsToUpdate)
     }
 }

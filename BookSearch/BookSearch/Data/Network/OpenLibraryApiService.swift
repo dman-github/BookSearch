@@ -53,7 +53,6 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
         }
         URLSession.shared.dataTask(with: URLRequest(url: searchURL)) { data, response, error in
             if let error = error {
-                print("URLSession error is \(error.localizedDescription)")
                 completion(.failure(error))
                 return
             }

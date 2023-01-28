@@ -24,6 +24,7 @@ extension BookSearchViewController: UICollectionViewDelegateFlowLayout {
     ) -> CGSize {
         var itemsPerRow = Constants.itemsPerRow
         if indexPath.row == viewModel.getSelectedIndex() {
+            // The cell once selected would occupy a single row
             itemsPerRow = 1
         }
         let paddingSpace = Constants.sectionInsets.left * (itemsPerRow + 1)

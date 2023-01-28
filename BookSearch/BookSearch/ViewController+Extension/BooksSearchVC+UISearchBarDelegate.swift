@@ -11,8 +11,7 @@ import UIKit
 extension BookSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let text = searchBar.text, !text.isEmpty else {return}
-        print("Searched Text: \(searchBar.text )")
-        //let moo = "Lord of the rings"
+        /* Initialise state of the Views before the seach begins */
         viewModel.setSelectedCell(index: -1)
         viewModel.searchForBooks(forSearchTerm: text)
         self.searchSpinner.startAnimating()

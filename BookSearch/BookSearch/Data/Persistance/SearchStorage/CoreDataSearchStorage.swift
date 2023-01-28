@@ -31,7 +31,6 @@ extension CoreDataSearchStorage: SearchStorage {
             guard let self = self else { return }
             // delete the current object that matches this searchterm
             if let objects = try? context.fetch(self.fetchRequest(forSearchTerm: searchTerm)) {
-                print("deleting \(objects.count) objects")
                 objects.forEach({context.delete($0)})
             }
             // save the new search term
@@ -50,7 +49,6 @@ extension CoreDataSearchStorage: SearchStorage {
                let object = objects.first,
                let bookEntities = object.bookEntities?.allObjects as? [BookEntity] {
                 let sorted = bookEntities.sorted(by: {$0.rank < $1.rank})
-                print("Found \(bookEntities.count) objects in coredata")
                 completion(.success(sorted.map({$0.toDto()})))
             } else {
                 completion(.failure(CoreDataStorageError.noData))
