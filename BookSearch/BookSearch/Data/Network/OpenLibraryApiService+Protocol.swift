@@ -10,7 +10,9 @@ import Foundation
 protocol OpenLibraryApiService {
     
     func searchBooks(with searchTerm: String, completion: @escaping (Result<BookSearchResponseDTO, Error>) -> Void)
+    func searchBooks(with searchTerm: String) async throws -> BookSearchResponseDTO
     func loadLargeImage(withId id: String,
                         _ completion: @escaping (Result<Data, Error>) -> Void)
+    func loadLargeImage(withId id: String) async throws -> Data
     
 }
