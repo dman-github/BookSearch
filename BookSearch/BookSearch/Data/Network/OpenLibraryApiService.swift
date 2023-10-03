@@ -18,55 +18,60 @@ enum ServiceError : Error {
 class OpenLibraryApiServiceImpl: OpenLibraryApiService {
     
     
+    @available(*, renamed: "searchBooks(with:)")
     func searchBooks(with searchTerm: String, completion: @escaping (Result<BookSearchResponseDTO, Error>) -> Void) {
-        guard let searchURL = openLibraryApiSearchURL(for: searchTerm) else {
-            completion(.failure(ServiceError.invalidApiRequest))
-            return
-        }
-        URLSession.shared.dataTask(with: URLRequest(url: searchURL)) { data, response, error in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            guard let response = response as? HTTPURLResponse, (200 ..< 300) ~= response.statusCode else {
-                completion(.failure(ServiceError.networkError))
-                return
-            }
+        Task {
             do {
-                guard let data = data else {return completion(.failure(ServiceError.dataNotRxed))}
-                let response = try JSONDecoder().decode(BookSearchResponseDTO.self, from: data)
-                completion(.success(response))
+                let result = try await searchBooks(with: searchTerm)
+                completion(.success(result))
             } catch {
-
-                completion(.failure(ServiceError.decoderError(error)))
+                completion(.failure(error))
             }
-        }.resume()
+        }
+    }
+    
+    
+    func searchBooks(with searchTerm: String) async throws -> BookSearchResponseDTO {
+        guard let searchURL = openLibraryApiSearchURL(for: searchTerm) else {
+            throw ServiceError.invalidApiRequest
+        }
+        let (data, response) = try await URLSession.shared.data(from: searchURL)
+        guard let httpResponse = response as? HTTPURLResponse, (200 ..< 300) ~= httpResponse.statusCode else {
+            throw ServiceError.networkError
+        }
+        do {
+            return try JSONDecoder().decode(BookSearchResponseDTO.self, from: data)
+        } catch {
+            throw ServiceError.decoderError(error)
+        }
     }
     
     
     
+    @available(*, renamed: "loadLargeImage(withId:)")
     func loadLargeImage(withId id: String,
                         _ completion: @escaping (Result<Data, Error>) -> Void) {
-        guard let searchURL = openLibraryCoverLoadURL(withid: id) else {
-            completion(.failure(ServiceError.invalidApiRequest))
-            return
-        }
-        URLSession.shared.dataTask(with: URLRequest(url: searchURL)) { data, response, error in
-            if let error = error {
+        Task {
+            do {
+                let result = try await loadLargeImage(withId: id)
+                completion(.success(result))
+            } catch {
                 completion(.failure(error))
-                return
             }
-            if let response = response as? HTTPURLResponse {
-                if (200 ..< 300) ~= response.statusCode {
-                    guard let data = data else {return completion(.failure(ServiceError.dataNotRxed))}
-                    completion(.success(data))
-                } else {
-                    completion(.failure(ServiceError.networkError))
-                }
-            } else {
-                completion(.failure(ServiceError.unknownAPIResponse))
-            }
-        }.resume()
+        }
+    }
+    
+    
+    func loadLargeImage(withId id: String) async throws -> Data {
+        guard let searchURL = openLibraryCoverLoadURL(withid: id) else {
+            throw ServiceError.invalidApiRequest
+        }
+        let (data,response) = try await URLSession.shared.data(from: searchURL)
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200 ..< 300) ~= httpResponse.statusCode else {
+            throw ServiceError.networkError
+        }
+        return data
     }
     
     
