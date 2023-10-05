@@ -152,6 +152,7 @@ extension BookSearchViewModel {
     func searchForBooks(forSearchTerm searchTerm: String) {
         Task {
             self.searchResultsRx.accept(true)
+            //Helper.executionStart = Date()
             do {
                 async let cachedBooks = bookSearchRepository.fetchListOfBooksFromCache(forSearchTerm: searchTerm)
                 async let networkedBooks = bookSearchRepository.fetchListOfBooksFromApi(forSearchTerm: searchTerm)
@@ -177,39 +178,6 @@ extension BookSearchViewModel {
         }
     }
     
-    /* run the api call with the search term, the results are parsed into the model objects */
-   /* func searchForBooks(forSearchTerm searchTerm: String) {
-        
-        /* Fetch list of books and save the resulting list in our Model */
-        bookSearchRepository.fetchListOfBooks(forSearchTerm: searchTerm) {[weak self] cached in
-            guard let self = self else {return}
-            if case .success(let booksDto) = cached {
-                print("Creating Model: \(searchTerm)  number of results :\(booksDto.count)")
-                self.createBooks(with: booksDto)
-                self.searchResultsRx.accept(true)
-            }
-        } _: { results in
-            self.searchResultsRx.accept(true)
-            switch results {
-                case .success(let booksDto):
-                    print("Update Model: \(searchTerm)  number of results :\(booksDto.count)")
-                    /* If the model is empty we need to create a new model with all the cells updated */
-                    if self.model.size() > 0 {
-                        self.updateBooks(with: booksDto)
-                    } else {
-                        self.createBooks(with: booksDto)
-                    }
-                    if booksDto.count == 0 {
-                        self.showMessage.accept("No searches found please try again")
-                    }
-                case .failure(_):
-                    self.showMessage.accept("Network error please try again")
-            }
-        }
-
-    }
-    
-    */
     /* we first check whether the imageId is present for the specific search result */
     /* if not then a default image is used */
     /* cell update of collection view is also triggered */
@@ -225,6 +193,7 @@ extension BookSearchViewModel {
                     self.model.setImage(forIndex: index, withData: imageData)
                     self.model.setLoading(forIndex: index, to: false)
                     self.notifyCollectionView(atIndex: index)
+                    //Helper.printWithThreadInfo(tag: "CoverId: \(coverId) index :\(index)")
                 } catch {
                     self.model.setImage(forIndex: index, withData: defaultData)
                     self.model.setLoading(forIndex: index, to: false)
