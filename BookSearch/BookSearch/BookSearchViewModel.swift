@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxRelay
 
+@MainActor
 class BookSearchViewModel {
     
     private let bookSearchRepository = BookSearchRepositoryImpl()
