@@ -215,22 +215,24 @@ extension BookSearchViewModel {
     /* cell update of collection view is also triggered */
     func loadLargeImage(forIndex index: Int) {
         guard index < model.size() else {return}
+        let defaultImage = UIImage(systemName: "books.vertical.circle.fill")
+        let defaultData = defaultImage?.pngData()
         let coverId = model.getCoverId(forIndex: index)
         if coverId > 0 {
-            bookSearchRepository.fetchLargeImage(forId: "\(coverId)") {[weak self] result in
-                switch result {
-                    case .success(let data):
-                        self?.model.setImage(forIndex: index, withData: data)
-                        self?.model.setLoading(forIndex: index, to: false)
-                        self?.notifyCollectionView(atIndex: index)
-                    case .failure(_):
-                        break
+            Task {
+                do {
+                    let imageData = try await bookSearchRepository.fetchLargeImage(forId:"\(coverId)")
+                    self.model.setImage(forIndex: index, withData: imageData)
+                    self.model.setLoading(forIndex: index, to: false)
+                    self.notifyCollectionView(atIndex: index)
+                } catch {
+                    self.model.setImage(forIndex: index, withData: defaultData)
+                    self.model.setLoading(forIndex: index, to: false)
+                    self.notifyCollectionView(atIndex: index)
                 }
             }
         } else {
-            let defaultImage = UIImage(systemName: "books.vertical.circle.fill")
-            let data = defaultImage?.pngData()
-            self.model.setImage(forIndex: index, withData: data)
+            self.model.setImage(forIndex: index, withData: defaultData)
             self.model.setLoading(forIndex: index, to: false)
             self.notifyCollectionView(atIndex: index)
         }
