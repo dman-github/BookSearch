@@ -23,7 +23,7 @@ class BookSearchRepositoryImpl: BookSearchRepository {
     }
     
     @available(*, renamed: "fetchListOfBooks(forSearchTerm:_:)")
-    func fetchListOfBooks(forSearchTerm searchTerm: String,
+    /*func fetchListOfBooks(forSearchTerm searchTerm: String,
                           _ cache: @escaping (Result<[BookDTO], Error>) -> Void,
                           _ completion: @escaping (Result<[BookDTO], Error>) -> Void) {
         Task {
@@ -34,10 +34,23 @@ class BookSearchRepositoryImpl: BookSearchRepository {
                 completion(.failure(error))
             }
         }
+    }*/
+    
+    func fetchListOfBooksFromCache(forSearchTerm searchTerm: String) async throws -> [BookDTO] {
+        return try await withCheckedThrowingContinuation { continuation in
+            searchStorage.getSearchResults(forSearchTerm: searchTerm) { result in
+                switch result {
+                    case .success(let books):
+                            continuation.resume(with: .success(books))
+                    case .failure(_):
+                            continuation.resume(with: .success([]))
+                }
+            }
+        }
     }
     
     
-    func fetchListOfBooks(forSearchTerm searchTerm: String,
+   /* func fetchListOfBooks(forSearchTerm searchTerm: String,
                           _ cache: @escaping (Result<[BookDTO], Error>) -> Void) async throws -> [BookDTO] {
         
         let cachedBooks = try await withCheckedThrowingContinuation { continuation in
@@ -68,9 +81,9 @@ class BookSearchRepositoryImpl: BookSearchRepository {
                 }
             }
         }
+        */
         
-        
-        private func fetchListOfBooksFromApi(forSearchTerm searchTerm: String) async throws -> [BookDTO] {
+        public func fetchListOfBooksFromApi(forSearchTerm searchTerm: String) async throws -> [BookDTO] {
             let dto = try await bookSearchApiService.searchBooks(with: searchTerm)
             let books = dto.getBooks()
             return try await withCheckedThrowingContinuation { continuation in
