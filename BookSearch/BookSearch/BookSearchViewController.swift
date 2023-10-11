@@ -21,6 +21,7 @@ class BookSearchViewController: UIViewController {
         super.viewDidLoad()
         setupBlurEffectView()
         setupSearchBar()
+        addGestureRecognisers()
         viewModel = BookSearchViewModel()
         viewModel.reloadCollectionView.subscribe(onNext: {[weak self] (refresh) in
             Helper.printWithThreadInfo(tag: "reloadCollectionView")
@@ -55,20 +56,28 @@ class BookSearchViewController: UIViewController {
                 self?.present(alert, animated: true, completion: nil)
             }
         }).disposed(by: disposeBag)
-        
-        func setupBlurEffectView() {
-            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
-            blurEffectView.effect = blurEffect
-            blurEffectView.backgroundColor = .white
-            blurEffectView.alpha = 0.5
-            blurEffectView.isHidden = true
-        }
-        
-        func setupSearchBar() {
-            let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-            textFieldInsideSearchBar?.backgroundColor = .white
 
-        }
+    }
+    
+    func setupBlurEffectView() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
+        blurEffectView.effect = blurEffect
+        blurEffectView.backgroundColor = .white
+        blurEffectView.alpha = 0.5
+        blurEffectView.isHidden = true
+    }
+    
+    func setupSearchBar() {
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = .white
+
+    }
+    
+    
+    private func addGestureRecognisers(){
+        let tapGestureRecogniser = UITapGestureRecognizer(target: self, action: #selector(handleTapEmptySpaceGesture))
+        tapGestureRecogniser.delegate = self
+        collectionView.addGestureRecognizer(tapGestureRecogniser)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {

@@ -39,6 +39,10 @@ class BookSearchViewModel {
         return self.model.getSelectedIndex()
     }
     
+    func undoSelectedIndex() {
+        self.model.undoSelectedIndex()
+    }
+    
     func getIndexesToUpdateAfterSelection() -> [Int] {
         /* Get the current and previous indicies, they both need to be updated */
         var indexes: [Int] = []

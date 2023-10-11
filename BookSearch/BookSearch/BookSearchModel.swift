@@ -76,6 +76,11 @@ class BookSearchModel {
         return selectedIndex
     }
     
+    func undoSelectedIndex() {
+        selectedIndex = -1
+        peviousSelectedIndex = -1
+    }
+    
     func setPreviousSelectedIndex(to index: Int) {
         peviousSelectedIndex = index
     }
