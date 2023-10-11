@@ -18,18 +18,6 @@ enum ServiceError : Error {
 class OpenLibraryApiServiceImpl: OpenLibraryApiService {
     
     
-    @available(*, renamed: "searchBooks(with:)")
-    func searchBooks(with searchTerm: String, completion: @escaping (Result<BookSearchResponseDTO, Error>) -> Void) {
-        Task {
-            do {
-                let result = try await searchBooks(with: searchTerm)
-                completion(.success(result))
-            } catch {
-                completion(.failure(error))
-            }
-        }
-    }
-    
     
     func searchBooks(with searchTerm: String) async throws -> BookSearchResponseDTO {
         guard let searchURL = openLibraryApiSearchURL(for: searchTerm) else {
@@ -43,21 +31,6 @@ class OpenLibraryApiServiceImpl: OpenLibraryApiService {
             return try JSONDecoder().decode(BookSearchResponseDTO.self, from: data)
         } catch {
             throw ServiceError.decoderError(error)
-        }
-    }
-    
-    
-    
-    @available(*, renamed: "loadLargeImage(withId:)")
-    func loadLargeImage(withId id: String,
-                        _ completion: @escaping (Result<Data, Error>) -> Void) {
-        Task {
-            do {
-                let result = try await loadLargeImage(withId: id)
-                completion(.success(result))
-            } catch {
-                completion(.failure(error))
-            }
         }
     }
     
