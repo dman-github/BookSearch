@@ -10,7 +10,7 @@ import UIKit
 
 enum Constants {
     static let reuseIdentifier = "BookSearchCell"
-    static let sectionInsets = UIEdgeInsets(top: 10, left: 5, bottom: 5, right: 5)
+    static let sectionInsets = UIEdgeInsets(top: 10, left: 10, bottom: 5, right: 10)
     static let itemsPerRow: CGFloat = 2
     static let maxCells: Int  = 10
 }

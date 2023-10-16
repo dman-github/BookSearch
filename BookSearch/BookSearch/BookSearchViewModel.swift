@@ -156,7 +156,6 @@ extension BookSearchViewModel {
     /* run the api call with the search term, the results are parsed into the model objects */
     func searchForBooks(forSearchTerm searchTerm: String) {
         Task {
-            self.searchResultsRx.accept(true)
             //Helper.executionStart = Date()
             do {
                 async let cachedBooks = bookSearchRepository.fetchListOfBooksFromCache(forSearchTerm: searchTerm)
@@ -164,9 +163,11 @@ extension BookSearchViewModel {
                 if try await cachedBooks.count > 0 {
                     let cachedBooks = try await cachedBooks
                     print("Creating Model: \(searchTerm)  number of results :\(cachedBooks.count)")
+                    self.searchResultsRx.accept(true)
                     self.createBooks(with: cachedBooks)
                 }
                 let booksDto = try await networkedBooks
+                self.searchResultsRx.accept(true)
                 print("Update Model: \(searchTerm)  number of results :\(booksDto.count)")
                 /* If the model is empty we need to create a new model with all the cells updated */
                 if self.model.size() > 0 {
