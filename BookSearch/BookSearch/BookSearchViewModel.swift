@@ -149,7 +149,7 @@ extension BookSearchViewModel {
     }
 }
 
-// MARK: ViewModel api calls
+// MARK: ViewModel Data access
 extension BookSearchViewModel {
     
     
@@ -160,6 +160,8 @@ extension BookSearchViewModel {
             do {
                 async let cachedBooks = bookSearchRepository.fetchListOfBooksFromCache(forSearchTerm: searchTerm)
                 async let networkedBooks = bookSearchRepository.fetchListOfBooksFromApi(forSearchTerm: searchTerm)
+                // Getting the cached data should be much faster than the api call over the network
+                // The cached data is awaited first followed by the networked data
                 if try await cachedBooks.count > 0 {
                     let cachedBooks = try await cachedBooks
                     print("Creating Model: \(searchTerm)  number of results :\(cachedBooks.count)")
