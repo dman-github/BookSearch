@@ -19,7 +19,7 @@ extension BookSearchViewController: UIGestureRecognizerDelegate {
     
     @objc func handleTapEmptySpaceGesture() {
         let indexPaths = viewModel.getIndexesToUpdateAfterSelection().map({IndexPath(row: $0, section: 0)})
-        // When uer touches the empty space undo the selected index
+        // When user touches the empty space undo the selected index
         viewModel.undoSelectedIndex()
         collectionView.reloadItems(at: indexPaths)
         collectionView.scrollToItem(at: IndexPath(row: 0, section: 0) ,

@@ -56,11 +56,20 @@ extension BookSearchViewController: UICollectionViewDataSource {
       _ collectionView: UICollectionView,
       shouldSelectItemAt indexPath: IndexPath
     ) -> Bool {
+        var indexPaths: [IndexPath] = []
         // When change selection item we must update the current and previous cells of the collection view
-        viewModel.setSelectedCell(index: indexPath.row)
-        let indexPaths = viewModel.getIndexesToUpdateAfterSelection().map({IndexPath(row: $0, section: 0)})
+        // first check if we have already selected a cell
+        if viewModel.getSelectedIndex() < 0 {
+            viewModel.setSelectedCell(index: indexPath.row)
+            indexPaths = viewModel.getIndexesToUpdateAfterSelection().map({IndexPath(row: $0, section: 0)})
+        } else {
+            indexPaths = viewModel.getIndexesToUpdateAfterSelection().map({IndexPath(row: $0, section: 0)})
+            viewModel.undoSelectedIndex()
+        }
+        // scroll so that the cell is at the center
         collectionView.reloadItems(at: indexPaths)
-        collectionView.scrollToItem(at: indexPath, at: .centeredVertically, animated: true)
+        collectionView.scrollToItem(at: indexPath,
+                                    at: .centeredVertically, animated: true)
         return true
     }
     
