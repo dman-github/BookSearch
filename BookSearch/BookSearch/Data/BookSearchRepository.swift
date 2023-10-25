@@ -22,58 +22,43 @@ class BookSearchRepositoryImpl: BookSearchRepository {
         self.searchStorage = searchStorage
     }
     
-    func fetchListOfBooks(forSearchTerm searchTerm: String,
-                          _ cache: @escaping (Result<[BookDTO], Error>) -> Void,
-                          _ completion: @escaping (Result<[BookDTO], Error>) -> Void) {
-        searchStorage.getSearchResults(forSearchTerm: searchTerm) {[weak self] result in
-            if case .success(let books) = result {
-                cache(.success(books))
-            }
-            /* Tne cache is first sent to the View layers then the api call is made to get a new list from the
-             search terms */
-            self?.fetchListOfBooksFromApi(forSearchTerm: searchTerm, completion)
-        }
-    }
-    
-    private func fetchListOfBooksFromApi(forSearchTerm searchTerm: String,
-                                         _ completion: @escaping (Result<[BookDTO], Error>) -> Void) {
-        bookSearchApiService.searchBooks(with: searchTerm) {[weak self] result in
-            switch result {
-                case .success(let dto):
-                    let books = dto.getBooks()
-                    self?.searchStorage.saveSearch(forSearchTerm: searchTerm, books: books) { result in
-                        switch result {
-                            case .success(_):
-                                print("books from api call :\(books.count)")
-                                completion(.success(books))
-                            case .failure(let error):
-                                completion(.failure(error))
-                        }
-                    }
-                case .failure(let error):
-                    completion(.failure(error))
-            }
-        }
-    }
-    
-    func fetchLargeImage(forId id: String, _ completion: @escaping (Result<Data, Error>) -> Void) {
-        if let cached = cacheService.retreiveImageFromCache(forImageId: id) {
-            completion(.success(cached))
-        } else {
-            bookSearchApiService.loadLargeImage(withId: id) {[weak self]result in
+    func fetchListOfBooksFromCache(forSearchTerm searchTerm: String) async throws -> [BookDTO] {
+        return try await withCheckedThrowingContinuation { continuation in
+            searchStorage.getSearchResults(forSearchTerm: searchTerm) { result in
                 switch result {
-                    case .success(let data):
-                        /* save the data in cache for next time */
-                        self?.cacheService.saveImageToCache(forImageId: id, withData: data)
-                        completion(.success(data))
-                    case .failure(let error):
-                        completion(.failure(error))
+                    case .success(let books):
+                            continuation.resume(with: .success(books))
+                    case .failure(_):
+                            continuation.resume(with: .success([]))
                 }
             }
         }
     }
-    
-    
-    
-    
+        
+    public func fetchListOfBooksFromApi(forSearchTerm searchTerm: String) async throws -> [BookDTO] {
+        let dto = try await bookSearchApiService.searchBooks(with: searchTerm)
+        let books = dto.getBooks()
+        return try await withCheckedThrowingContinuation { continuation in
+            self.searchStorage.saveSearch(forSearchTerm: searchTerm, books: books) { result in
+                switch result {
+                    case .success(_):
+                        print("books from api call :\(books.count)")
+                        continuation.resume(with: .success(books))
+                    case .failure(let error):
+                        continuation.resume(with: .failure(error))
+                }
+            }
+        }
+    }
+        
+        
+    func fetchLargeImage(forId id: String) async throws -> Data {
+        if let cached = cacheService.retreiveImageFromCache(forImageId: id) {
+            return cached
+        } else {
+            let data = try await bookSearchApiService.loadLargeImage(withId: id)
+            self.cacheService.saveImageToCache(forImageId: id, withData: data)
+            return data
+        }
+    }
 }

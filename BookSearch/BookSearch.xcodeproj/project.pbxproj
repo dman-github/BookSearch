@@ -16,6 +16,8 @@
 		090635DA2982B3C2002CE8EB /* BookSearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090635D92982B3C2002CE8EB /* BookSearchModel.swift */; };
 		090635DC2982BB08002CE8EB /* BookSearchRepository+Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090635DB2982BB08002CE8EB /* BookSearchRepository+Protocol.swift */; };
 		090635DE2982BB26002CE8EB /* BookSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 090635DD2982BB26002CE8EB /* BookSearchRepository.swift */; };
+		095D961B2ACF5DA400A79542 /* Helper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095D961A2ACF5DA400A79542 /* Helper.swift */; };
+		095D961D2AD7361100A79542 /* BookSearchVC+UIGestureRecogniserDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 095D961C2AD7361100A79542 /* BookSearchVC+UIGestureRecogniserDelegate.swift */; };
 		09A2EDDD297EDD8A0078E4E2 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDDC297EDD8A0078E4E2 /* AppDelegate.swift */; };
 		09A2EDE1297EDD8A0078E4E2 /* BookSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A2EDE0297EDD8A0078E4E2 /* BookSearchViewController.swift */; };
 		09A2EDE4297EDD8A0078E4E2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 09A2EDE2297EDD8A0078E4E2 /* Main.storyboard */; };
@@ -44,6 +46,8 @@
 		090635D92982B3C2002CE8EB /* BookSearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchModel.swift; sourceTree = "<group>"; };
 		090635DB2982BB08002CE8EB /* BookSearchRepository+Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookSearchRepository+Protocol.swift"; sourceTree = "<group>"; };
 		090635DD2982BB26002CE8EB /* BookSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchRepository.swift; sourceTree = "<group>"; };
+		095D961A2ACF5DA400A79542 /* Helper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helper.swift; sourceTree = "<group>"; };
+		095D961C2AD7361100A79542 /* BookSearchVC+UIGestureRecogniserDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BookSearchVC+UIGestureRecogniserDelegate.swift"; sourceTree = "<group>"; };
 		09A2EDD9297EDD8A0078E4E2 /* BookSearch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BookSearch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		09A2EDDC297EDD8A0078E4E2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		09A2EDE0297EDD8A0078E4E2 /* BookSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookSearchViewController.swift; sourceTree = "<group>"; };
@@ -92,6 +96,7 @@
 				090635CE298032DA002CE8EB /* BooksSearchVC+UISearchBarDelegate.swift */,
 				090635D02980341F002CE8EB /* BooksSearchVC+CollectionViewDataSource.swift */,
 				090635D429804FE0002CE8EB /* BookSearchVC+UICollectionViewDelegateFlowLayout.swift */,
+				095D961C2AD7361100A79542 /* BookSearchVC+UIGestureRecogniserDelegate.swift */,
 			);
 			path = "ViewController+Extension";
 			sourceTree = "<group>";
@@ -129,6 +134,7 @@
 				09A2EDEA297EDD930078E4E2 /* LaunchScreen.storyboard */,
 				09A2EDED297EDD930078E4E2 /* Info.plist */,
 				090635D229804F57002CE8EB /* Constants.swift */,
+				095D961A2ACF5DA400A79542 /* Helper.swift */,
 			);
 			path = BookSearch;
 			sourceTree = "<group>";
@@ -330,11 +336,13 @@
 				090635D12980341F002CE8EB /* BooksSearchVC+CollectionViewDataSource.swift in Sources */,
 				09A2EDE7297EDD8A0078E4E2 /* BookSearch.xcdatamodeld in Sources */,
 				09A2EDF9297EEDCF0078E4E2 /* OpenLibraryApiService+Protocol.swift in Sources */,
+				095D961D2AD7361100A79542 /* BookSearchVC+UIGestureRecogniserDelegate.swift in Sources */,
 				09B358FA29830A5F007B08AC /* ImageCacheService+Protocol.swift in Sources */,
 				090635DA2982B3C2002CE8EB /* BookSearchModel.swift in Sources */,
 				090635D329804F57002CE8EB /* Constants.swift in Sources */,
 				090635DC2982BB08002CE8EB /* BookSearchRepository+Protocol.swift in Sources */,
 				09B3590129831610007B08AC /* CoreDataStackMain.swift in Sources */,
+				095D961B2ACF5DA400A79542 /* Helper.swift in Sources */,
 				09A2EDE1297EDD8A0078E4E2 /* BookSearchViewController.swift in Sources */,
 				09B358F7298309DB007B08AC /* ImageCacheService.swift in Sources */,
 				090635DE2982BB26002CE8EB /* BookSearchRepository.swift in Sources */,
@@ -509,6 +517,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Damitha.BookSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -539,6 +548,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = Damitha.BookSearch;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_STRICT_CONCURRENCY = complete;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

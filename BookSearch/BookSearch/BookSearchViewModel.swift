@@ -9,6 +9,7 @@ import Foundation
 import RxSwift
 import RxRelay
 
+@MainActor
 class BookSearchViewModel {
     
     private let bookSearchRepository = BookSearchRepositoryImpl()
@@ -36,6 +37,10 @@ class BookSearchViewModel {
     
     func getSelectedIndex() -> Int {
         return self.model.getSelectedIndex()
+    }
+    
+    func undoSelectedIndex() {
+        self.model.undoSelectedIndex()
     }
     
     func getIndexesToUpdateAfterSelection() -> [Int] {
@@ -144,60 +149,67 @@ extension BookSearchViewModel {
     }
 }
 
-// MARK: ViewModel api calls
+// MARK: ViewModel Data access
 extension BookSearchViewModel {
+    
+    
     /* run the api call with the search term, the results are parsed into the model objects */
     func searchForBooks(forSearchTerm searchTerm: String) {
-        
-        /* Fetch list of books and save the resulting list in our Model */
-        bookSearchRepository.fetchListOfBooks(forSearchTerm: searchTerm) {[weak self] cached in
-            guard let self = self else {return}
-            if case .success(let booksDto) = cached {
-                print("Creating Model: \(searchTerm)  number of results :\(booksDto.count)")
-                self.createBooks(with: booksDto)
+        Task {
+            //Helper.executionStart = Date()
+            do {
+                async let cachedBooks = bookSearchRepository.fetchListOfBooksFromCache(forSearchTerm: searchTerm)
+                async let networkedBooks = bookSearchRepository.fetchListOfBooksFromApi(forSearchTerm: searchTerm)
+                // Getting the cached data should be much faster than the api call over the network
+                // The cached data is awaited first followed by the networked data
+                if try await cachedBooks.count > 0 {
+                    let cachedBooks = try await cachedBooks
+                    print("Creating Model: \(searchTerm)  number of results :\(cachedBooks.count)")
+                    self.searchResultsRx.accept(true)
+                    self.createBooks(with: cachedBooks)
+                }
+                let booksDto = try await networkedBooks
                 self.searchResultsRx.accept(true)
-            }
-        } _: { results in
-            self.searchResultsRx.accept(true)
-            switch results {
-                case .success(let booksDto):
-                    print("Update Model: \(searchTerm)  number of results :\(booksDto.count)")
-                    /* If the model is empty we need to create a new model with all the cells updated */
-                    if self.model.size() > 0 {
-                        self.updateBooks(with: booksDto)
-                    } else {
-                        self.createBooks(with: booksDto)
-                    }
-                    if booksDto.count == 0 {
-                        self.showMessage.accept("No searches found please try again")
-                    }
-                case .failure(_):
-                    self.showMessage.accept("Network error please try again")
+                print("Update Model: \(searchTerm)  number of results :\(booksDto.count)")
+                /* If the model is empty we need to create a new model with all the cells updated */
+                if self.model.size() > 0 {
+                    self.updateBooks(with: booksDto)
+                } else {
+                    self.createBooks(with: booksDto)
+                }
+                if booksDto.count == 0 {
+                    self.showMessage.accept("No searches found please try again")
+                }
+            } catch {
+                self.showMessage.accept("Network error please try again")
             }
         }
-
     }
+    
     /* we first check whether the imageId is present for the specific search result */
     /* if not then a default image is used */
     /* cell update of collection view is also triggered */
     func loadLargeImage(forIndex index: Int) {
         guard index < model.size() else {return}
+        let defaultImage = UIImage(systemName: "books.vertical.circle.fill")
+        let defaultData = defaultImage?.pngData()
         let coverId = model.getCoverId(forIndex: index)
         if coverId > 0 {
-            bookSearchRepository.fetchLargeImage(forId: "\(coverId)") {[weak self] result in
-                switch result {
-                    case .success(let data):
-                        self?.model.setImage(forIndex: index, withData: data)
-                        self?.model.setLoading(forIndex: index, to: false)
-                        self?.notifyCollectionView(atIndex: index)
-                    case .failure(_):
-                        break
+            Task {
+                do {
+                    let imageData = try await bookSearchRepository.fetchLargeImage(forId:"\(coverId)")
+                    self.model.setImage(forIndex: index, withData: imageData)
+                    self.model.setLoading(forIndex: index, to: false)
+                    self.notifyCollectionView(atIndex: index)
+                    //Helper.printWithThreadInfo(tag: "CoverId: \(coverId) index :\(index)")
+                } catch {
+                    self.model.setImage(forIndex: index, withData: defaultData)
+                    self.model.setLoading(forIndex: index, to: false)
+                    self.notifyCollectionView(atIndex: index)
                 }
             }
         } else {
-            let defaultImage = UIImage(systemName: "books.vertical.circle.fill")
-            let data = defaultImage?.pngData()
-            self.model.setImage(forIndex: index, withData: data)
+            self.model.setImage(forIndex: index, withData: defaultData)
             self.model.setLoading(forIndex: index, to: false)
             self.notifyCollectionView(atIndex: index)
         }

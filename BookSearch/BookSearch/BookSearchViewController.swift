@@ -21,13 +21,13 @@ class BookSearchViewController: UIViewController {
         super.viewDidLoad()
         setupBlurEffectView()
         setupSearchBar()
+        addGestureRecognisers()
         viewModel = BookSearchViewModel()
         viewModel.reloadCollectionView.subscribe(onNext: {[weak self] (refresh) in
+            Helper.printWithThreadInfo(tag: "reloadCollectionView")
             if refresh {
                 // This reloads all the collectionview cells
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                }
+                self?.collectionView.reloadData()
             }
         }).disposed(by: disposeBag)
         
@@ -35,46 +35,49 @@ class BookSearchViewController: UIViewController {
             if items.count > 0 {
                 let rows = items.map({IndexPath(row: $0, section: 0)})
                 // This reloads collectionview at a particular cell
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadItems(at: rows)
-                }
+                self?.collectionView.reloadItems(at: rows)
             }
         }).disposed(by: disposeBag)
         
         viewModel.searchResultsRx.subscribe(onNext: {[weak self] (rx) in
             if rx {
                 // This turns off the spinner
-                DispatchQueue.main.async {
-                    self?.blurEffectView.isHidden = true
-                    self?.searchSpinner.stopAnimating()
-                }
+                Helper.printWithThreadInfo(tag: "searchResultsRx")
+                self?.blurEffectView.isHidden = true
+                self?.searchSpinner.stopAnimating()
             }
         }).disposed(by: disposeBag)
         
         
         viewModel.showMessage.subscribe(onNext: {[weak self] (msg) in
             if !msg.isEmpty {
-                DispatchQueue.main.async {
-                    let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: UIAlertController.Style.alert)
-                    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                    self?.present(alert, animated: true, completion: nil)
-                }
+                let alert = UIAlertController(title: "Alert", message: msg, preferredStyle: UIAlertController.Style.alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self?.present(alert, animated: true, completion: nil)
             }
         }).disposed(by: disposeBag)
-        
-        func setupBlurEffectView() {
-            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
-            blurEffectView.effect = blurEffect
-            blurEffectView.backgroundColor = .white
-            blurEffectView.alpha = 0.5
-            blurEffectView.isHidden = true
-        }
-        
-        func setupSearchBar() {
-            let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
-            textFieldInsideSearchBar?.backgroundColor = .white
 
-        }
+    }
+    
+    func setupBlurEffectView() {
+        let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.light)
+        blurEffectView.effect = blurEffect
+        blurEffectView.backgroundColor = .white
+        blurEffectView.alpha = 0.5
+        blurEffectView.isHidden = true
+    }
+    
+    func setupSearchBar() {
+        let textFieldInsideSearchBar = searchBar.value(forKey: "searchField") as? UITextField
+        textFieldInsideSearchBar?.backgroundColor = .white
+
+    }
+    
+    
+    private func addGestureRecognisers(){
+        let tapGestureRecogniser = UITapGestureRecognizer(target: self, action: #selector(handleTapEmptySpaceGesture))
+        tapGestureRecogniser.delegate = self
+        collectionView.addGestureRecognizer(tapGestureRecogniser)
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
