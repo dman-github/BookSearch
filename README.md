@@ -10,7 +10,7 @@ This is a simple app that displays the top ten results of a call to the OpenLibr
 
 - **CollectionView**: The app utilizes a `UICollectionView` to display information about the books returned in the search results. Each cell in the collection view includes details such as the book cover image and author information. The cover image is downloaded asynchronously, as it is a time-consuming task.
 
-- **Caching**: All search results are cached in 'CoreData' with the search term to allow for faster retrieval of matching searches in subsequent requests. Images are cached in 'NSCache'
+- **Caching**: All search results are cached in CoreData with the search term to allow for faster retrieval of matching searches in subsequent requests. Images are cached in `NSCache`
 
 - **Architecture**: The app follows the MVVM (Model-View-ViewModel) architectural pattern. The `UICollectionView` on the ViewLayer observes changes to the data model using RxSwift. There is a repository layer responsible for fetching data from the network or cache, the repository is owned by the view model.
 
